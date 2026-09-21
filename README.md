@@ -11,7 +11,7 @@ This repository is the public marketing site (Next.js App Router). It does not i
 | Path | What it is |
 | --- | --- |
 | `/` | Home: product story, features, pricing, interactive sample demo, FAQ |
-| `/pricing` | Owner Operator $14.99/mo, Small Fleet $29.99/mo (most popular), Fleet Pro $59.99/mo |
+| `/pricing` | Owner Operator $9.99/mo, Small Fleet $19.99/mo (most popular), Fleet Pro $39.99/mo |
 | `/fuel-cards` | Coast, RoadFlex, AtoB, WEX/EFS, TSS, and Mudflap. Tracking links come from env vars. See AFFILIATES.md |
 | `/support` | Contact form that opens the visitor's email app |
 | `/privacy` `/terms` `/refunds` `/subprocessors` | Legal |
@@ -22,7 +22,7 @@ This repository is the public marketing site (Next.js App Router). It does not i
 
 - 7-day free trial. A credit card is required. The card is charged only after the trial. Cancel anytime.
 - The site never says a credit card is optional.
-- Monthly amounts match the live Stripe prices: Owner Operator $14.99, Small Fleet $29.99, Fleet Pro $59.99. Yearly is eight times monthly: $119.92, $239.92, and $479.92. That is 4 months free, about 33% off. The site shows those yearly totals, not a $9.99 / $19.99 / $39.99 monthly sticker.
+- Monthly amounts: Owner Operator $9.99, Small Fleet $19.99, Fleet Pro $39.99. Yearly amounts: $119.92, $239.92, and $479.92. Yearly is about twelve times monthly, so the site does not claim "33% off" or "4 months free."
 - IFTA worksheets are prepared here. HaulBooks Pro does not file taxes and is not tax advice.
 - Fleet Pro stops at 15 trucks.
 
@@ -53,28 +53,30 @@ This site does not create a Stripe Checkout session. The HaulBooks app on haulbo
 https://haulbookspro.com/auth?mode=signup&plan=small_fleet&interval=yearly
 ```
 
-`plan` is `owner_operator`, `small_fleet`, or `fleet_pro`. `interval` is `monthly` or `yearly`. After signup the app opens Stripe with the lookup key (`small_fleet_yearly`). If a Price ID is missing, that button goes to `https://haulbookspro.com/pricing` instead.
+`plan` is `owner_operator`, `small_fleet`, or `fleet_pro`. `interval` is `monthly` or `yearly`. After signup the app opens Stripe with the lookup key (`small_fleet_monthly`, `owner_operator_yearly`, and the rest). The link does not put a dollar amount in the query string.
 
-Live prices on account `acct_1SggnO8XymiTE9iP` (Lovable lookup keys):
+Live prices on account `acct_1SggnO8XymiTE9iP`:
 
 ```
-NEXT_PUBLIC_STRIPE_PRICE_OWNER_MONTHLY=price_1UFfLl8XymiTE9iP1NqCpRqO
+NEXT_PUBLIC_STRIPE_PRICE_OWNER_MONTHLY=price_1UIDF88XymiTE9iPvRuk9Kpi
+NEXT_PUBLIC_STRIPE_PRICE_SMALL_MONTHLY=price_1UIDHK8XymiTE9iPGcmTvOdM
+NEXT_PUBLIC_STRIPE_PRICE_FLEET_MONTHLY=price_1UIDJb8XymiTE9iPK1WiGxQc
 NEXT_PUBLIC_STRIPE_PRICE_OWNER_YEARLY=price_1UFfLn8XymiTE9iPI7CeCno9
-NEXT_PUBLIC_STRIPE_PRICE_SMALL_FLEET_MONTHLY=price_1UFfLn8XymiTE9iPmxn3RoSt
 NEXT_PUBLIC_STRIPE_PRICE_SMALL_FLEET_YEARLY=price_1UFfLm8XymiTE9iPugV0TCcl
-NEXT_PUBLIC_STRIPE_PRICE_FLEET_PRO_MONTHLY=price_1UFfLm8XymiTE9iP6mNHYs7m
 NEXT_PUBLIC_STRIPE_PRICE_FLEET_PRO_YEARLY=price_1UFfLm8XymiTE9iPeNd2n7lG
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 ```
 
 | Env var | Lookup key | Amount | Product |
 | --- | --- | --- | --- |
-| `NEXT_PUBLIC_STRIPE_PRICE_OWNER_MONTHLY` | `owner_operator_monthly` | $14.99 | `prod_VGBj4HPsHnQJyk` |
+| `NEXT_PUBLIC_STRIPE_PRICE_OWNER_MONTHLY` | `owner_operator_monthly` | $9.99 | `prod_VGBj4HPsHnQJyk` |
 | `NEXT_PUBLIC_STRIPE_PRICE_OWNER_YEARLY` | `owner_operator_yearly` | $119.92 | `prod_VGBj4HPsHnQJyk` |
-| `NEXT_PUBLIC_STRIPE_PRICE_SMALL_FLEET_MONTHLY` | `small_fleet_monthly` | $29.99 | `prod_VGBjfX9YkpilGx` |
+| `NEXT_PUBLIC_STRIPE_PRICE_SMALL_MONTHLY` | `small_fleet_monthly` | $19.99 | `prod_VGBjfX9YkpilGx` |
 | `NEXT_PUBLIC_STRIPE_PRICE_SMALL_FLEET_YEARLY` | `small_fleet_yearly` | $239.92 | `prod_VGBjfX9YkpilGx` |
-| `NEXT_PUBLIC_STRIPE_PRICE_FLEET_PRO_MONTHLY` | `fleet_pro_monthly` | $59.99 | `prod_VGBj1pAMhfoyLG` |
+| `NEXT_PUBLIC_STRIPE_PRICE_FLEET_MONTHLY` | `fleet_pro_monthly` | $39.99 | `prod_VGBj1pAMhfoyLG` |
 | `NEXT_PUBLIC_STRIPE_PRICE_FLEET_PRO_YEARLY` | `fleet_pro_yearly` | $479.92 | `prod_VGBj1pAMhfoyLG` |
+
+The 7-day trial is not stored on the Stripe Price. The product app's subscribe call must set `subscription_data.trial_period_days` to 7 and collect a payment method. This marketing site does not create that Checkout session.
 
 Jaime fills `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`. This marketing site does not load it and must not receive a secret key.
 

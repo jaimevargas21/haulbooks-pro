@@ -3,6 +3,7 @@ import { DM_Sans, Space_Grotesk } from "next/font/google";
 import { AdsTag } from "@/components/ads-tag";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { logoImage, shareImage } from "@/lib/brand";
 import { signInLink } from "@/lib/checkout";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -41,11 +42,13 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "HaulBooks Pro — Trucking bookkeeping & IFTA prep",
     description: site.description,
+    ...(shareImage() ? { images: [{ url: shareImage()!, alt: "HaulBooks Pro" }] } : {}),
   },
   twitter: {
     card: "summary_large_image",
     title: "HaulBooks Pro — Trucking bookkeeping & IFTA prep",
     description: site.description,
+    ...(shareImage() ? { images: [shareImage()!] } : {}),
   },
 };
 
@@ -61,7 +64,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
-        <SiteHeader signInHref={signIn.href} />
+        <SiteHeader signInHref={signIn.href} logoSrc={logoImage()} />
         <main id="content">{children}</main>
         <SiteFooter />
         <AdsTag />

@@ -15,6 +15,7 @@ import {
   roles,
   stats,
 } from "@/lib/content";
+import { heroImage, receiptImage } from "@/lib/brand";
 import { getPlans } from "@/lib/plans";
 import { site } from "@/lib/site";
 
@@ -36,9 +37,9 @@ const jsonLd = {
       operatingSystem: "Web",
       description: site.description,
       offers: [
-        { "@type": "Offer", name: "Owner Operator", price: "14.99", priceCurrency: "USD" },
-        { "@type": "Offer", name: "Small Fleet", price: "29.99", priceCurrency: "USD" },
-        { "@type": "Offer", name: "Fleet Pro", price: "59.99", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Owner Operator", price: "9.99", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Small Fleet", price: "19.99", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Fleet Pro", price: "39.99", priceCurrency: "USD" },
       ],
     },
     {
@@ -80,7 +81,7 @@ export default function HomePage() {
         </div>
         <div className="relative overflow-hidden rounded-3xl border border-line bg-navy-900 p-2">
           <Image
-            src="/images/hero-truck.jpg"
+            src={heroImage()}
             alt="Semi truck driving down an open highway at sunset"
             width={1600}
             height={1104}
@@ -200,7 +201,7 @@ export default function HomePage() {
       <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:px-6 sm:py-24 lg:grid-cols-2">
         <div className="relative overflow-hidden rounded-3xl border border-line lg:order-1">
           <Image
-            src="/images/receipt-scan.jpg"
+            src={receiptImage()}
             alt="Driver photographing a fuel receipt with a phone inside the truck cab"
             width={1200}
             height={900}

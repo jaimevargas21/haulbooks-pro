@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { logoImage } from "@/lib/brand";
 import { site } from "@/lib/site";
 
 const product = [
@@ -24,7 +25,7 @@ export function SiteFooter() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <Image
-              src="/images/logo.png"
+              src={logoImage()}
               alt="HaulBooks Pro"
               width={160}
               height={66}

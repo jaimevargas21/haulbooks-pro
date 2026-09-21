@@ -59,6 +59,8 @@ Coast does not approve sole proprietorships. Send LLC, corporation, and partners
 
 ## Env vars
 
+Fuel-card links are separate from HaulBooks subscription prices. Plans on the site are Owner Operator $9.99/mo or $119.92/yr, Small Fleet $19.99/mo or $239.92/yr, and Fleet Pro $39.99/mo or $479.92/yr. Those Stripe Price IDs are in `.env.example` and README. Do not put a subscription price on a fuel-card button.
+
 ```
 NEXT_PUBLIC_AFFILIATE_COAST=
 NEXT_PUBLIC_AFFILIATE_ROADFLEX=

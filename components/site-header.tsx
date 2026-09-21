@@ -6,7 +6,7 @@ import { useState } from "react";
 import { nav } from "@/lib/content";
 import { ButtonLink } from "@/components/ui";
 
-export function SiteHeader({ signInHref }: { signInHref: string }) {
+export function SiteHeader({ signInHref, logoSrc }: { signInHref: string; logoSrc: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -14,7 +14,7 @@ export function SiteHeader({ signInHref }: { signInHref: string }) {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-5 sm:h-20 sm:px-6">
         <Link href="/" className="flex shrink-0 items-center" onClick={() => setOpen(false)}>
           <Image
-            src="/images/logo.png"
+            src={logoSrc}
             alt="HaulBooks Pro"
             width={176}
             height={72}

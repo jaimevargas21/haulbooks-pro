@@ -31,7 +31,7 @@ export default function OpenGraphImage() {
             Receipts, fuel, bills, miles, and IFTA prep for owner-operators and small fleets.
           </div>
         </div>
-        <div style={{ display: "flex", fontSize: 24, color: "#f0b429" }}>haulbookspro.com · From $14.99/mo</div>
+        <div style={{ display: "flex", fontSize: 24, color: "#f0b429" }}>haulbookspro.com · From $9.99/mo</div>
       </div>
     ),
     { ...size },
