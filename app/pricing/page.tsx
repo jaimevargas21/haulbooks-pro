@@ -10,7 +10,7 @@ import { trialPoints as points } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "HaulBooks Pro trucking bookkeeping from $9.99 a month. Owner Operator, Small Fleet, and Fleet Pro up to 15 trucks. 7-day trial, credit card required.",
+    "HaulBooks Pro trucking bookkeeping from $14.99 a month. Owner Operator, Small Fleet, and Fleet Pro up to 15 trucks. 7-day trial, credit card required.",
 };
 
 export default function PricingPage() {
@@ -21,7 +21,7 @@ export default function PricingPage() {
       <div className="mx-auto max-w-6xl">
         <Eyebrow>7-day free trial on every plan</Eyebrow>
         <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-5xl">
-          Trucking bookkeeping from $9.99 a month
+          Trucking bookkeeping from $14.99 a month
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-muted">
           Snap receipts, track fuel and bills, and keep IFTA and tax season ready all year. Start free

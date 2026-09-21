@@ -43,23 +43,15 @@ export default async function StartPage({
       <TrialNote className="mt-4" />
       <p className="mt-4 text-sm text-muted">{site.ifta}</p>
       <div className="mt-8">
-        {target.configured ? (
-          <ButtonLink href={target.href}>Continue to secure checkout</ButtonLink>
-        ) : (
-          <ButtonLink href={`mailto:${site.supportEmail}?subject=${encodeURIComponent(`Start ${plan.name} trial (${interval})`)}`}>
-            Email us to start this trial
-          </ButtonLink>
-        )}
+        <ButtonLink href={target.href}>
+          {target.configured ? "Continue to signup" : "See plans in the app"}
+        </ButtonLink>
       </div>
-      {!target.configured ? (
-        <p className="mt-4 text-sm leading-relaxed text-muted">
-          Online checkout is not connected on this deployment yet. Email {site.supportEmail} with the plan
-          name and we will send the Stripe link. A credit card is required there. You are charged only
-          after the 7 days.
-        </p>
-      ) : (
-        <p className="mt-4 text-sm text-muted">Checkout is handled by Stripe. HaulBooks Pro does not store your card number.</p>
-      )}
+      <p className="mt-4 text-sm leading-relaxed text-muted">
+        {target.configured
+          ? "Signup and the 7-day trial continue in the HaulBooks app. A credit card is required there. Stripe charges the card only after the trial ends. HaulBooks Pro does not store your card number."
+          : `This plan is not tied to a Stripe Price ID on this deployment, so the button opens pricing in the HaulBooks app. A credit card is required there. You are charged only after the 7 days. Questions: ${site.supportEmail}.`}
+      </p>
       <p className="mt-6 text-sm">
         <Link href="/pricing" className="text-amber-300 underline">
           Compare plans

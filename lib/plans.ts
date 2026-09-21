@@ -18,7 +18,7 @@ export const plans: Plan[] = [
   {
     id: "owner_operator",
     name: "Owner Operator",
-    monthly: 9.99,
+    monthly: 14.99,
     yearly: 119.92,
     tagline: "One truck, all the paperwork handled.",
     truckLimit: 1,
@@ -36,7 +36,7 @@ export const plans: Plan[] = [
   {
     id: "small_fleet",
     name: "Small Fleet",
-    monthly: 19.99,
+    monthly: 29.99,
     yearly: 239.92,
     tagline: "For growing fleets with drivers and an accountant.",
     truckLimit: 5,
@@ -54,7 +54,7 @@ export const plans: Plan[] = [
   {
     id: "fleet_pro",
     name: "Fleet Pro",
-    monthly: 39.99,
+    monthly: 59.99,
     yearly: 479.92,
     tagline: "Deeper reporting for established operations.",
     truckLimit: 15,

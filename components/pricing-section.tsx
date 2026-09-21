@@ -52,7 +52,7 @@ export function PricingSection({
           })}
         </div>
         <p className="mt-3 text-xs text-muted">
-          Yearly is the annual amount below, billed once. It is the same rate as paying monthly.
+          Yearly is billed once and equals 8 months of the monthly price — 4 months free, about 33% off.
         </p>
       </div>
       <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -81,8 +81,8 @@ export function PricingSection({
               </p>
               <p className="mt-2 text-xs font-semibold text-success">
                 {interval === "yearly"
-                  ? `${money(plan.monthly)}/mo equivalent · billed ${money(plan.yearly)} once a year`
-                  : `Or ${money(plan.yearly)} billed once a year`}
+                  ? `4 months free · about 33% off ${money(plan.monthly)}/mo`
+                  : `Or ${money(plan.yearly)}/yr — 4 months free`}
               </p>
               <p className="mt-3 text-sm text-muted">{plan.tagline}</p>
               <ul className="mt-6 space-y-2.5">

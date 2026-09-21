@@ -11,18 +11,18 @@ This repository is the public marketing site (Next.js App Router). It does not i
 | Path | What it is |
 | --- | --- |
 | `/` | Home: product story, features, pricing, interactive sample demo, FAQ |
-| `/pricing` | Owner Operator $9.99/mo, Small Fleet $19.99/mo (most popular), Fleet Pro $39.99/mo |
+| `/pricing` | Owner Operator $14.99/mo, Small Fleet $29.99/mo (most popular), Fleet Pro $59.99/mo |
 | `/fuel-cards` | Coast, RoadFlex, AtoB, WEX/EFS, TSS, and Mudflap. Tracking links come from env vars. See AFFILIATES.md |
 | `/support` | Contact form that opens the visitor's email app |
 | `/privacy` `/terms` `/refunds` `/subprocessors` | Legal |
-| `/start` | Trial handoff. Used when a Stripe URL is not configured yet |
-| `/sign-in` | Points at `NEXT_PUBLIC_APP_URL`, or tells the visitor to email support |
+| `/start` | Trial handoff into the HaulBooks app signup for the selected plan |
+| `/sign-in` | Opens the product app at `NEXT_PUBLIC_APP_URL`, or https://haulbookspro.com/auth |
 
 ## Product rules baked into the copy
 
 - 7-day free trial. A credit card is required. The card is charged only after the trial. Cancel anytime.
 - The site never says a credit card is optional.
-- Yearly amounts: Owner Operator $119.92, Small Fleet $239.92, Fleet Pro $479.92. Those are about twelve times the monthly price, so the site does not claim "33% off" or "4 months free."
+- Monthly amounts match the live Stripe prices: Owner Operator $14.99, Small Fleet $29.99, Fleet Pro $59.99. Yearly is eight times monthly: $119.92, $239.92, and $479.92. That is 4 months free, about 33% off. The site shows those yearly totals, not a $9.99 / $19.99 / $39.99 monthly sticker.
 - IFTA worksheets are prepared here. HaulBooks Pro does not file taxes and is not tax advice.
 - Fleet Pro stops at 15 trucks.
 
@@ -45,12 +45,41 @@ Node 20 or newer.
 
 ## Environment variables
 
-See `.env.example`. All of them are optional. The production build succeeds with none of them set.
+See `.env.example`. The production build succeeds with none of them set. Trial buttons still deep-link to the live app, using the Price IDs below as defaults.
 
-Jaime still needs to fill these before the buttons do real work:
+This site does not create a Stripe Checkout session. The HaulBooks app on haulbookspro.com collects the card. A pricing button goes to:
 
-1. **Stripe signup URL** — `NEXT_PUBLIC_STRIPE_SIGNUP_URL`, or one link per plan and interval (`NEXT_PUBLIC_STRIPE_SIGNUP_URL_SMALL_FLEET_YEARLY` and the rest). Per-plan links are the right fit for Stripe Payment Links. Until one of these is set, "Start 7-day free trial" opens `/start`, which explains the card-required trial and emails haulbookspro@gmail.com.
-2. **App sign-in** — `NEXT_PUBLIC_APP_URL`. Until it is set, Sign in opens `/sign-in`.
+```
+https://haulbookspro.com/auth?mode=signup&plan=small_fleet&interval=yearly
+```
+
+`plan` is `owner_operator`, `small_fleet`, or `fleet_pro`. `interval` is `monthly` or `yearly`. After signup the app opens Stripe with the lookup key (`small_fleet_yearly`). If a Price ID is missing, that button goes to `https://haulbookspro.com/pricing` instead.
+
+Live prices on account `acct_1SggnO8XymiTE9iP` (Lovable lookup keys):
+
+```
+NEXT_PUBLIC_STRIPE_PRICE_OWNER_MONTHLY=price_1UFfLl8XymiTE9iP1NqCpRqO
+NEXT_PUBLIC_STRIPE_PRICE_OWNER_YEARLY=price_1UFfLn8XymiTE9iPI7CeCno9
+NEXT_PUBLIC_STRIPE_PRICE_SMALL_FLEET_MONTHLY=price_1UFfLn8XymiTE9iPmxn3RoSt
+NEXT_PUBLIC_STRIPE_PRICE_SMALL_FLEET_YEARLY=price_1UFfLm8XymiTE9iPugV0TCcl
+NEXT_PUBLIC_STRIPE_PRICE_FLEET_PRO_MONTHLY=price_1UFfLm8XymiTE9iP6mNHYs7m
+NEXT_PUBLIC_STRIPE_PRICE_FLEET_PRO_YEARLY=price_1UFfLm8XymiTE9iPeNd2n7lG
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+```
+
+| Env var | Lookup key | Amount | Product |
+| --- | --- | --- | --- |
+| `NEXT_PUBLIC_STRIPE_PRICE_OWNER_MONTHLY` | `owner_operator_monthly` | $14.99 | `prod_VGBj4HPsHnQJyk` |
+| `NEXT_PUBLIC_STRIPE_PRICE_OWNER_YEARLY` | `owner_operator_yearly` | $119.92 | `prod_VGBj4HPsHnQJyk` |
+| `NEXT_PUBLIC_STRIPE_PRICE_SMALL_FLEET_MONTHLY` | `small_fleet_monthly` | $29.99 | `prod_VGBjfX9YkpilGx` |
+| `NEXT_PUBLIC_STRIPE_PRICE_SMALL_FLEET_YEARLY` | `small_fleet_yearly` | $239.92 | `prod_VGBjfX9YkpilGx` |
+| `NEXT_PUBLIC_STRIPE_PRICE_FLEET_PRO_MONTHLY` | `fleet_pro_monthly` | $59.99 | `prod_VGBj1pAMhfoyLG` |
+| `NEXT_PUBLIC_STRIPE_PRICE_FLEET_PRO_YEARLY` | `fleet_pro_yearly` | $479.92 | `prod_VGBj1pAMhfoyLG` |
+
+Jaime fills `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`. This marketing site does not load it and must not receive a secret key.
+
+1. **Stripe Price IDs** — the six variables above. They already match the live account. Change one only when Stripe replaces that price, then redeploy.
+2. **App origin** — `NEXT_PUBLIC_APP_URL`. Leave it empty while the product app is still at https://haulbookspro.com. Set it when the app moves to its own origin. Sign in opens `/auth` on that origin.
 3. **Affiliate links** — `NEXT_PUBLIC_AFFILIATE_COAST`, `ROADFLEX`, `ATOB`, `WEX`, `TSS`, `MUDFLAP`. Until each one is set, that button says “Get offer” (TSS says “Partner inquiry”) and opens the official program page in AFFILIATES.md. Start with Coast on PartnerStack.
 4. **Optional ads tag** — `NEXT_PUBLIC_GOOGLE_ADS_ID` (`AW-…` or `G-…`). Leave it blank to load no tag.
 
@@ -61,7 +90,7 @@ Jaime still needs to fill these before the buttons do real work:
 1. Import this GitHub repository. Framework preset: Next.js. Build command: `npm run build`. Output is handled by Next.js (do not set a static `out` directory).
 2. Add the environment variables above in the Vercel project. Production and Preview can differ.
 3. Attach the domain `haulbookspro.com`.
-4. Deploy, then click a pricing button and a fuel-card button and confirm they land on the Stripe and affiliate URLs you set.
+4. Deploy, then click a pricing button and confirm it opens `https://haulbookspro.com/auth?mode=signup&plan=…&interval=…` (or the app origin you set). Click a fuel-card button and confirm the affiliate URL.
 
 No server, database, or cron is required for this site.
 

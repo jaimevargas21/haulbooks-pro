@@ -36,9 +36,9 @@ const jsonLd = {
       operatingSystem: "Web",
       description: site.description,
       offers: [
-        { "@type": "Offer", name: "Owner Operator", price: "9.99", priceCurrency: "USD" },
-        { "@type": "Offer", name: "Small Fleet", price: "19.99", priceCurrency: "USD" },
-        { "@type": "Offer", name: "Fleet Pro", price: "39.99", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Owner Operator", price: "14.99", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Small Fleet", price: "29.99", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Fleet Pro", price: "59.99", priceCurrency: "USD" },
       ],
     },
     {
