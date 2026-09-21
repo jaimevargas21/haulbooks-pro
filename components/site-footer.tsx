@@ -4,10 +4,12 @@ import { logoImage } from "@/lib/brand";
 import { site } from "@/lib/site";
 
 const product = [
-  { href: "/#features", label: "Features" },
-  { href: "/#demo", label: "Demo" },
+  { href: "/product", label: "Product" },
+  { href: "/ifta", label: "IFTA" },
   { href: "/pricing", label: "Pricing" },
   { href: "/fuel-cards", label: "Fuel cards" },
+  { href: "/for-accountants", label: "For accountants" },
+  { href: "/blog", label: "Blog" },
 ];
 
 const legal = [
@@ -15,7 +17,7 @@ const legal = [
   { href: "/terms", label: "Terms" },
   { href: "/refunds", label: "Refunds" },
   { href: "/subprocessors", label: "Subprocessors" },
-  { href: "/support", label: "Contact support" },
+  { href: "/contact", label: "Contact support" },
 ];
 
 export function SiteFooter() {

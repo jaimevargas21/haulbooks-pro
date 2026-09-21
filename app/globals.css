@@ -3,14 +3,14 @@
 @theme inline {
   --font-sans: var(--font-dm), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --color-navy-950: oklch(14.5% 0.03 262);
-  --color-navy-900: oklch(18.2% 0.032 260);
-  --color-navy-850: oklch(21.5% 0.032 260);
-  --color-navy-800: oklch(26% 0.032 258);
-  --color-navy-700: oklch(33% 0.034 258);
-  --color-amber-300: oklch(88% 0.13 85);
-  --color-amber-400: oklch(82% 0.15 78);
-  --color-amber-500: oklch(76% 0.16 68);
+  --color-navy-950: #0b1220;
+  --color-navy-900: #0f1b2d;
+  --color-navy-850: #152238;
+  --color-navy-800: #1c2c46;
+  --color-navy-700: #2a3d5c;
+  --color-amber-300: #ffd27a;
+  --color-amber-400: #e8a017;
+  --color-amber-500: #f5a623;
   --color-ink: oklch(97.5% 0.008 95);
   --color-muted: oklch(78% 0.02 255);
   --color-line: oklch(100% 0 0 / 0.12);

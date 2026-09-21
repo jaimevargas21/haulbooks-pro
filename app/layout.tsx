@@ -4,7 +4,6 @@ import { AdsTag } from "@/components/ads-tag";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { logoImage, shareImage } from "@/lib/brand";
-import { signInLink } from "@/lib/checkout";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -53,8 +52,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const signIn = signInLink();
-
   return (
     <html lang="en" className={`${sans.variable} ${display.variable}`}>
       <body className="min-h-screen bg-navy-950 font-sans text-ink antialiased">
@@ -64,7 +61,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
-        <SiteHeader signInHref={signIn.href} logoSrc={logoImage()} />
+        <SiteHeader logoSrc={logoImage()} />
         <main id="content">{children}</main>
         <SiteFooter />
         <AdsTag />

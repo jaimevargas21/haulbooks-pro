@@ -51,8 +51,7 @@ export function Eyebrow({ children }: { children: ReactNode }) {
 export function TrialNote({ className = "" }: { className?: string }) {
   return (
     <p className={`text-xs leading-relaxed text-muted ${className}`}>
-      7-day free trial. A credit card is required. You are charged only after the trial ends. Cancel
-      anytime.
+      7-day trial · Card required · Cancel before day 8 · Not tax advice
     </p>
   );
 }

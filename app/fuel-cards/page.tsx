@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { FuelEstimator } from "@/components/fuel-estimator";
-import { ButtonLink, Eyebrow } from "@/components/ui";
+import { ButtonLink, Eyebrow, TrialNote } from "@/components/ui";
 import { fuelTips } from "@/lib/content";
 import { commissionDisclosure, getFuelOffers, joinChecklist } from "@/lib/fuel";
+
+function pickLabel(id: string) {
+  if (id === "mudflap") return "Best for owner-operators";
+  if (id === "coast") return "Best for small fleets";
+  return null;
+}
 
 export const metadata: Metadata = {
   title: "Fuel cards",
@@ -25,8 +32,20 @@ export default function FuelCardsPage() {
           or small fleet can compare, and that HaulBooks can join for a commission. Every gallon still
           belongs in HaulBooks Pro so IFTA stays accurate.
         </p>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <ButtonLink href="#programs">Compare partner offers</ButtonLink>
+          <ButtonLink href="/signup" variant="secondary">
+            Track fuel in HaulBooks
+          </ButtonLink>
+        </div>
         <p className="mt-4 max-w-3xl rounded-2xl border border-amber-400/40 bg-amber-500/10 px-4 py-3 text-sm leading-relaxed text-amber-100">
-          Advertising disclosure: {commissionDisclosure}
+          Advertising disclosure: HaulBooks may earn a commission. Your price does not change.
+        </p>
+        <p className="mt-4 max-w-3xl rounded-2xl border border-line bg-navy-900/60 px-4 py-3 text-sm text-muted">
+          A pump discount does not help IFTA if the gallons are not logged by state.{" "}
+          <Link href="/ifta" className="font-semibold text-amber-300">
+            See IFTA worksheets →
+          </Link>
         </p>
 
         <div className="mt-8">
@@ -63,18 +82,20 @@ export default function FuelCardsPage() {
           </div>
         </section>
 
-        <section className="mt-14">
+        <section id="programs" className="mt-14 scroll-mt-24">
           <h2 className="font-display text-3xl font-bold">The programs</h2>
           <div className="mt-6 grid gap-5">
-            {offers.map((offer) => (
+            {offers.map((offer) => {
+              const pick = pickLabel(offer.id);
+              return (
               <article key={offer.id} id={offer.id} className="rounded-3xl border border-line bg-navy-900/60 p-6">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="rounded-full bg-amber-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-navy-950">
+                  <p className="rounded-full border border-line px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-muted">
                     {offer.accessLabel}
                   </p>
-                  {offer.priority ? (
-                    <p className="rounded-full border border-amber-400/50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-amber-300">
-                      Start here
+                  {pick ? (
+                    <p className="rounded-full bg-amber-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-navy-950">
+                      {pick}
                     </p>
                   ) : null}
                 </div>
@@ -113,9 +134,17 @@ export default function FuelCardsPage() {
                       </li>
                     ))}
                   </ul>
+                  <p className="mt-4 text-sm text-muted">
+                    After you look at the offer,{" "}
+                    <Link href="/signup" className="text-amber-300 underline">
+                      track those gallons in HaulBooks
+                    </Link>
+                    .
+                  </p>
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -159,11 +188,9 @@ export default function FuelCardsPage() {
             and the IFTA worksheet is ready when the quarter closes.
           </p>
           <div className="mt-6">
-            <ButtonLink href="/pricing">Start 7-day free trial</ButtonLink>
+            <ButtonLink href="/signup">Track fuel in HaulBooks</ButtonLink>
           </div>
-          <p className="mt-3 text-xs text-muted">
-            7-day free trial. A credit card is required. You are charged only after the trial ends.
-          </p>
+          <TrialNote className="mt-3" />
         </section>
 
         <p className="mt-8 text-xs leading-relaxed text-muted">{commissionDisclosure} Confirm the current offer on the provider’s site before enrolling.</p>

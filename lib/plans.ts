@@ -84,7 +84,12 @@ export function getPlans(): PricedPlan[] {
 }
 
 export function findPlan(id: string | undefined) {
-  return plans.find((plan) => plan.id === id) ?? plans.find((plan) => plan.highlighted)!;
+  const normalized = id?.trim().replaceAll("-", "_");
+  return plans.find((plan) => plan.id === normalized) ?? plans.find((plan) => plan.highlighted)!;
+}
+
+export function signupHref(plan: PlanId, interval: BillingInterval) {
+  return `/signup?plan=${plan.replaceAll("_", "-")}&interval=${interval}`;
 }
 
 export function parseInterval(value: string | undefined): BillingInterval {

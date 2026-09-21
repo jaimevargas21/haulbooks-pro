@@ -85,7 +85,7 @@ Only values shaped like `AW-…` or `G-…` are loaded. Leave blank and no tag i
 
 - IFTA and income-tax filing. The product prepares worksheets. It does not file, and the site says so.
 - Refunds. The policy is 30 days from the order. Stripe is the Merchant of Record. Support handles requests at haulbookspro@gmail.com.
-- Support tickets. `/support` opens the visitor's email app. Nothing is stored on this site.
+- Support tickets. `/contact` opens the visitor's email app. `/support` redirects there. Nothing is stored on this site.
 - Price changes. Edit `lib/plans.ts` and the Price ID defaults in `lib/checkout.ts`, set the matching env vars, then redeploy. Keep yearly at $119.92, $239.92, and $479.92 unless Stripe changes those prices.
 - Affiliate applications. Coast on PartnerStack first, then RoadFlex, AtoB, WEX/EFS, TSS, and a Mudflap publisher ask. Steps are in `AFFILIATES.md`. This repo only stores the tracking URLs you paste into env vars.
 

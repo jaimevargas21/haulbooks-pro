@@ -1,10 +1,10 @@
 export const nav = [
-  { href: "/#what", label: "What is it" },
-  { href: "/#features", label: "Features" },
+  { href: "/product", label: "Product" },
+  { href: "/ifta", label: "IFTA" },
   { href: "/pricing", label: "Pricing" },
   { href: "/fuel-cards", label: "Fuel cards" },
-  { href: "/#demo", label: "Demo" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/for-accountants", label: "For accountants" },
+  { href: "/blog", label: "Blog" },
 ] as const;
 
 export const replaces = [
@@ -173,7 +173,7 @@ export const productFaqs = [
   },
   {
     q: "Is there a free trial, and do I need a credit card?",
-    a: "Every new company gets a 7-day free trial with full access. A credit card is required to start. You are not charged until the trial ends, and you can cancel anytime before then. If you cancel during the trial, you are not billed.",
+    a: "Every new company gets a 7-day free trial with full access. A credit card is required to start. You are not charged until day 8. Cancel before then and you are not billed.",
   },
   {
     q: "How many trucks can I run?",
@@ -192,7 +192,7 @@ export const productFaqs = [
 export const pricingFaqs = [
   {
     q: "How does the 7-day free trial work?",
-    a: "Pick a plan, add your card, and use every feature free for 7 days. A credit card is required to start. We only charge you when the trial ends, and you can cancel before then.",
+    a: "Pick a plan, add your card, and use every feature free for 7 days. A credit card is required. You are not charged until day 8. Cancel before day 8 and you are not billed.",
   },
   {
     q: "Can I change plans later?",
@@ -204,7 +204,7 @@ export const pricingFaqs = [
   },
   {
     q: "What if I cancel?",
-    a: "You keep access until the end of the period you paid for, and your records stay readable. There is no cancellation fee. Cancel during the trial and you are not charged.",
+    a: "Cancel before day 8 and you are not charged. After you are billed, you keep access until the end of the period you paid for. Your records stay readable. There is no cancellation fee.",
   },
 ] as const;
 

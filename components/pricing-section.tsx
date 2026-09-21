@@ -59,7 +59,6 @@ export function PricingSection({
         {plans.map((plan) => {
           const amount = interval === "yearly" ? plan.yearly : plan.monthly;
           const suffix = interval === "yearly" ? "/yr" : "/mo";
-          const target = plan.checkout[interval];
           return (
             <article
               key={plan.id}
@@ -91,8 +90,8 @@ export function PricingSection({
                 ))}
               </ul>
               <div className="mt-8">
-                <ButtonLink href={target.href} className="w-full">
-                  Start 7-day free trial
+                <ButtonLink href={`/signup?plan=${plan.id.replaceAll("_", "-")}&interval=${interval}`} className="w-full">
+                  Start free trial
                 </ButtonLink>
                 <TrialNote className="mt-3" />
               </div>
@@ -100,9 +99,12 @@ export function PricingSection({
           );
         })}
       </div>
-      <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-muted">
+      <p className="mx-auto mt-6 max-w-2xl text-center text-xs font-semibold text-amber-100">
+        Card required · Not charged until day 8 · Cancel in one click
+      </p>
+      <p className="mx-auto mt-2 max-w-2xl text-center text-xs text-muted">
         Fifteen trucks is the maximum. Owner Operator is one truck, Small Fleet is up to five, Fleet Pro
-        is up to fifteen.
+        is up to fifteen. Yearly is billed once at the annual total. It is the same rate as paying monthly.
       </p>
     </div>
   );

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { nav } from "@/lib/content";
 import { ButtonLink } from "@/components/ui";
 
-export function SiteHeader({ signInHref, logoSrc }: { signInHref: string; logoSrc: string }) {
+export function SiteHeader({ logoSrc }: { logoSrc: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -22,7 +22,7 @@ export function SiteHeader({ signInHref, logoSrc }: { signInHref: string; logoSr
             style={{ width: "auto", height: "2.25rem" }}
           />
         </Link>
-        <nav className="hidden items-center gap-6 text-sm font-medium text-muted lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-4 text-[13px] font-medium text-muted xl:flex" aria-label="Primary">
           {nav.map((item) => (
             <Link key={item.href} href={item.href} className="transition hover:text-amber-300">
               {item.label}
@@ -30,15 +30,17 @@ export function SiteHeader({ signInHref, logoSrc }: { signInHref: string; logoSr
           ))}
         </nav>
         <div className="flex items-center gap-1 sm:gap-2">
-          <ButtonLink href={signInHref} variant="ghost" className="hidden sm:inline-flex">
-            Sign in
-          </ButtonLink>
-          <ButtonLink href="/pricing" className="px-4 py-2 text-xs sm:text-sm">
-            Get started
+          <span className="hidden sm:inline-flex">
+            <ButtonLink href="/signin" variant="ghost">
+              Sign in
+            </ButtonLink>
+          </span>
+          <ButtonLink href="/signup" className="px-4 py-2 text-xs sm:text-sm">
+            Start free trial
           </ButtonLink>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink xl:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((value) => !value)}
@@ -55,7 +57,7 @@ export function SiteHeader({ signInHref, logoSrc }: { signInHref: string; logoSr
         </div>
       </div>
       {open ? (
-        <nav id="mobile-nav" className="border-t border-line bg-navy-950 px-5 py-4 lg:hidden" aria-label="Mobile">
+        <nav id="mobile-nav" className="border-t border-line bg-navy-950 px-5 py-4 xl:hidden" aria-label="Mobile">
           <ul className="space-y-1">
             {nav.map((item) => (
               <li key={item.href}>
@@ -70,7 +72,7 @@ export function SiteHeader({ signInHref, logoSrc }: { signInHref: string; logoSr
             ))}
             <li>
               <Link
-                href={signInHref}
+                href="/signin"
                 className="block rounded-xl px-3 py-3 text-sm font-medium text-muted hover:bg-navy-800 hover:text-ink"
                 onClick={() => setOpen(false)}
               >

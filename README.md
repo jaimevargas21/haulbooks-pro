@@ -10,13 +10,17 @@ This repository is the public marketing site (Next.js App Router). It does not i
 
 | Path | What it is |
 | --- | --- |
-| `/` | Home: product story, features, pricing, interactive sample demo, FAQ |
+| `/` | Short decision homepage |
+| `/product` | Features, roles, full demo, calendar |
+| `/ifta` | IFTA marketing landing. Not sign-in |
 | `/pricing` | Owner Operator $9.99/mo, Small Fleet $19.99/mo (most popular), Fleet Pro $39.99/mo |
 | `/fuel-cards` | Coast, RoadFlex, AtoB, WEX/EFS, TSS, and Mudflap. Tracking links come from env vars. See AFFILIATES.md |
-| `/support` | Contact form that opens the visitor's email app |
+| `/for-accountants` | Accountant invite path |
+| `/blog` | Three launch posts |
+| `/signup` | Card-required trial handoff into the app. `/start` redirects here |
+| `/signin` | Sign-in only. `/sign-in` redirects here |
+| `/contact` | Contact form that opens the visitor's email app. `/support` redirects here |
 | `/privacy` `/terms` `/refunds` `/subprocessors` | Legal |
-| `/start` | Trial handoff into the HaulBooks app signup for the selected plan |
-| `/sign-in` | Opens the product app at `NEXT_PUBLIC_APP_URL`, or https://haulbookspro.com/auth |
 
 ## Product rules baked into the copy
 

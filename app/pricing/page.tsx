@@ -24,9 +24,8 @@ export default function PricingPage() {
           Trucking bookkeeping from $9.99 a month
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-muted">
-          Snap receipts, track fuel and bills, and keep IFTA and tax season ready all year. Start free
-          for 7 days — you are not charged until the trial ends, and you can cancel any time. A credit
-          card is required to start.
+          Snap receipts, track fuel and bills, and keep IFTA ready all year. A credit card is required.
+          You are not charged until day 8. Cancel before then and you are not billed.
         </p>
         <ul className="mt-6 flex flex-wrap gap-2">
           {points.map((point) => (
@@ -51,13 +50,13 @@ export default function PricingPage() {
         </div>
         <div className="mx-auto mt-16 max-w-2xl text-center">
           <h2 className="font-display text-3xl font-bold">Ready to clear the shoebox?</h2>
-          <p className="mt-3 text-muted">Set up in minutes. Your first 7 days are free.</p>
+          <p className="mt-3 text-muted">Seven days free. Card on file. Cancel before day 8.</p>
           <div className="mt-6">
-            <ButtonLink href={plans[1].checkout.yearly.href}>Start my free trial</ButtonLink>
+            <ButtonLink href="/signup?plan=small-fleet&interval=yearly">Start free trial</ButtonLink>
           </div>
           <TrialNote className="mt-3" />
           <p className="mt-4 text-sm text-muted">
-            Questions? <Link className="text-amber-300 underline" href="/support">Contact support</Link>
+            Questions? <Link className="text-amber-300 underline" href="/contact">Contact support</Link>
           </p>
         </div>
       </div>
