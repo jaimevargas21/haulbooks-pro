@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-dm), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --color-navy-950: #0b1220;
+  --color-navy-900: #0f1b2d;
+  --color-navy-850: #152238;
+  --color-navy-800: #1c2c46;
+  --color-navy-700: #2a3d5c;
+  --color-amber-300: #ffd27a;
+  --color-amber-400: #e8a017;
+  --color-amber-500: #f5a623;
+  --color-ink: oklch(97.5% 0.008 95);
+  --color-muted: oklch(78% 0.02 255);
+  --color-line: oklch(100% 0 0 / 0.12);
+  --color-success: oklch(78% 0.14 155);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-navy-950);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-amber-500) 45%, transparent);
+  color: var(--color-ink);
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-glow {
+  background-image:
+    radial-gradient(ellipse 70% 50% at 90% -10%, color-mix(in oklab, var(--color-amber-500) 28%, transparent), transparent 60%),
+    radial-gradient(ellipse 45% 40% at -10% 10%, color-mix(in oklab, oklch(55% 0.14 255) 30%, transparent), transparent 55%);
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
