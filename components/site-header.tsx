@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { BrandMark } from "@/components/brand-mark";
 import { nav } from "@/lib/content";
 import { ButtonLink } from "@/components/ui";
 
@@ -13,14 +13,7 @@ export function SiteHeader({ logoSrc }: { logoSrc: string }) {
     <header className="sticky top-0 z-40 border-b border-line bg-navy-950/85 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-5 sm:h-20 sm:px-6">
         <Link href="/" className="flex shrink-0 items-center" onClick={() => setOpen(false)}>
-          <Image
-            src={logoSrc}
-            alt="HaulBooks Pro"
-            width={176}
-            height={72}
-            priority
-            style={{ width: "auto", height: "2.25rem" }}
-          />
+          <BrandMark src={logoSrc} priority />
         </Link>
         <nav className="hidden items-center gap-4 text-[13px] font-medium text-muted xl:flex" aria-label="Primary">
           {nav.map((item) => (

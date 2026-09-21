@@ -1,10 +1,24 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 
 export const alt = "HaulBooks Pro — trucking bookkeeping and IFTA prep";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  try {
+    const branded = await readFile(path.join(process.cwd(), "public", "images", "og-share.png"));
+    return new Response(branded, {
+      headers: {
+        "Content-Type": "image/png",
+        "Cache-Control": "public, max-age=0, must-revalidate",
+      },
+    });
+  } catch {
+    // og-share.png is not in the repo yet. The generated card stays until it is.
+  }
+
   return new ImageResponse(
     (
       <div

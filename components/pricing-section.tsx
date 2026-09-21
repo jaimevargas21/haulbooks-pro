@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { BillingInterval, PricedPlan } from "@/lib/plans";
+import { yearlyBillingNote, type BillingInterval, type PricedPlan } from "@/lib/plans";
 import { money } from "@/lib/format";
 import { ButtonLink, CheckItem, TrialNote } from "@/components/ui";
 
@@ -51,9 +51,7 @@ export function PricingSection({
             );
           })}
         </div>
-        <p className="mt-3 text-xs text-muted">
-          Yearly is the annual amount below, billed once. It is the same rate as paying monthly.
-        </p>
+        <p className="mt-3 text-xs text-muted">{yearlyBillingNote}</p>
       </div>
       <div className="mt-10 grid gap-5 lg:grid-cols-3">
         {plans.map((plan) => {
@@ -80,8 +78,8 @@ export function PricingSection({
               </p>
               <p className="mt-2 text-xs font-semibold text-success">
                 {interval === "yearly"
-                  ? `${money(plan.monthly)}/mo if you paid monthly · billed once`
-                  : `Or ${money(plan.yearly)} billed once a year`}
+                  ? `${money(plan.yearly)} billed once · about 12× ${money(plan.monthly)}/mo`
+                  : `Or ${money(plan.yearly)} billed once a year · about 12× monthly`}
               </p>
               <p className="mt-3 text-sm text-muted">{plan.tagline}</p>
               <ul className="mt-6 space-y-2.5">
@@ -104,7 +102,7 @@ export function PricingSection({
       </p>
       <p className="mx-auto mt-2 max-w-2xl text-center text-xs text-muted">
         Fifteen trucks is the maximum. Owner Operator is one truck, Small Fleet is up to five, Fleet Pro
-        is up to fifteen. Yearly is billed once at the annual total. It is the same rate as paying monthly.
+        is up to fifteen. {yearlyBillingNote}
       </p>
     </div>
   );

@@ -150,8 +150,8 @@ export default function IftaPage() {
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-400">Most fleets start here</p>
           <h2 className="mt-3 font-display text-3xl font-bold">Small Fleet · $19.99/mo</h2>
           <p className="mt-3 text-muted">
-            Up to 5 trucks, accountant access, and IFTA preparation. Yearly is $239.92 billed once — the
-            same rate as paying monthly.
+            Up to 5 trucks, accountant access, and IFTA preparation. Yearly is $119.92, $239.92, or
+            $479.92, billed once. That is about twelve times the monthly price.
           </p>
           <div className="mt-6">
             <ButtonLink href="/signup?plan=small-fleet&interval=yearly">Start free trial</ButtonLink>

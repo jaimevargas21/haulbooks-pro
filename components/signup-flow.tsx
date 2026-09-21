@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { checkoutLink } from "@/lib/checkout";
 import { money } from "@/lib/format";
-import { plans, signupHref, type BillingInterval, type PlanId } from "@/lib/plans";
+import { plans, signupHref, yearlyBillingNote, type BillingInterval, type PlanId } from "@/lib/plans";
 import { site } from "@/lib/site";
 import { ButtonLink, TrialNote } from "@/components/ui";
 
@@ -54,9 +54,7 @@ export function SignupFlow({
       {step === 1 ? (
         <div className="mt-8">
           <h2 className="font-display text-2xl font-bold">Choose a plan</h2>
-          <p className="mt-2 text-sm text-muted">
-            Yearly is billed once at the annual total. It is the same rate as paying monthly.
-          </p>
+          <p className="mt-2 text-sm text-muted">{yearlyBillingNote}</p>
           <div className="mt-4 inline-flex rounded-full border border-line bg-navy-900 p-1" role="radiogroup" aria-label="Billing interval">
             {(
               [

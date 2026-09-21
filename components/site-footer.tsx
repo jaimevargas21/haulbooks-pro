@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BrandMark } from "@/components/brand-mark";
 import { logoImage } from "@/lib/brand";
 import { site } from "@/lib/site";
 
@@ -26,13 +26,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <Image
-              src={logoImage()}
-              alt="HaulBooks Pro"
-              width={160}
-              height={66}
-              style={{ width: "auto", height: "2rem" }}
-            />
+            <BrandMark src={logoImage()} height="2rem" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
               Bookkeeping, receipts, and IFTA prep for owner-operators and small fleets. Software, not
               tax advice. Fleets up to {site.maxTrucks} trucks.

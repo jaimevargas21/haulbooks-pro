@@ -92,6 +92,10 @@ export function signupHref(plan: PlanId, interval: BillingInterval) {
   return `/signup?plan=${plan.replaceAll("_", "-")}&interval=${interval}`;
 }
 
+/** Same sentence on the homepage and the pricing page. Not a percentage-off claim. */
+export const yearlyBillingNote =
+  "Yearly is $119.92, $239.92, or $479.92, billed once. That is about twelve times the monthly price.";
+
 export function parseInterval(value: string | undefined): BillingInterval {
   return value === "monthly" ? "monthly" : "yearly";
 }
