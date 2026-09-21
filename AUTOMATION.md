@@ -57,29 +57,20 @@ Header "Sign in" uses this. Leave it empty until the product app has a public UR
 
 ### 3. Fuel-card affiliate URLs
 
-`/fuel-cards` is the passive-income page. Each button reads one variable:
+`/fuel-cards` is the passive-income page. Signup order, payouts, and official URLs are in `AFFILIATES.md`. Apply to Coast on PartnerStack first.
 
 ```
-NEXT_PUBLIC_AFFILIATE_MUDFLAP
+NEXT_PUBLIC_AFFILIATE_COAST
+NEXT_PUBLIC_AFFILIATE_ROADFLEX
 NEXT_PUBLIC_AFFILIATE_ATOB
-NEXT_PUBLIC_AFFILIATE_TCS
-NEXT_PUBLIC_AFFILIATE_RTS
 NEXT_PUBLIC_AFFILIATE_WEX
-NEXT_PUBLIC_AFFILIATE_COMDATA
+NEXT_PUBLIC_AFFILIATE_TSS
+NEXT_PUBLIC_AFFILIATE_MUDFLAP
 ```
 
-Paste the affiliate tracking URL from each program. Links are `rel="sponsored"`.
+Paste the tracking URL from each program. Links are `rel="sponsored"`.
 
-If a variable is empty, the button uses the provider's public marketing page:
-
-- Mudflap — https://www.mudflapinc.com/
-- AtoB — https://www.atob.com/
-- TCS — https://www.tcsfuel.com/
-- RTS — https://www.rtsinc.com/services/fuel-card
-- WEX — https://www.wexinc.com/products/business-fuel-cards/
-- Comdata — https://www.comdata.com/en/solutions/trucking-fleet-cards.html
-
-Those public pages are not affiliate links. Replace them before expecting commission. The page discloses that HaulBooks Pro may earn a commission and that the customer's price does not change.
+If a variable is empty, the button says “Get offer” and opens the official program page (TSS says “Partner inquiry” and opens https://octanefuel.com/). The page and the site footer disclose that HaulBooks may earn a commission and that the customer’s price does not change. You do not need these links for the site to ship.
 
 ### 4. Optional Google Ads
 
@@ -95,7 +86,7 @@ Only values shaped like `AW-…` or `G-…` are loaded. Leave blank and no tag i
 - Refunds. The policy is 30 days from the order. Stripe is the Merchant of Record. Support handles requests at haulbookspro@gmail.com.
 - Support tickets. `/support` opens the visitor's email app. Nothing is stored on this site.
 - Price changes. Edit `lib/plans.ts`, then redeploy. Keep the yearly totals in sync with Stripe.
-- Affiliate program applications (Mudflap, AtoB, TCS, RTS, WEX, Comdata partner portals). This repo only stores the resulting URLs.
+- Affiliate applications. Coast on PartnerStack first, then RoadFlex, AtoB, WEX/EFS, TSS, and a Mudflap publisher ask. Steps are in `AFFILIATES.md`. This repo only stores the tracking URLs you paste into env vars.
 
 ## Checks after a deploy
 

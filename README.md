@@ -12,7 +12,7 @@ This repository is the public marketing site (Next.js App Router). It does not i
 | --- | --- |
 | `/` | Home: product story, features, pricing, interactive sample demo, FAQ |
 | `/pricing` | Owner Operator $9.99/mo, Small Fleet $19.99/mo (most popular), Fleet Pro $39.99/mo |
-| `/fuel-cards` | Fuel-card comparison and savings estimator. Offer buttons use affiliate env URLs |
+| `/fuel-cards` | Coast, RoadFlex, AtoB, WEX/EFS, TSS, and Mudflap. Tracking links come from env vars. See AFFILIATES.md |
 | `/support` | Contact form that opens the visitor's email app |
 | `/privacy` `/terms` `/refunds` `/subprocessors` | Legal |
 | `/start` | Trial handoff. Used when a Stripe URL is not configured yet |
@@ -51,7 +51,7 @@ Jaime still needs to fill these before the buttons do real work:
 
 1. **Stripe signup URL** — `NEXT_PUBLIC_STRIPE_SIGNUP_URL`, or one link per plan and interval (`NEXT_PUBLIC_STRIPE_SIGNUP_URL_SMALL_FLEET_YEARLY` and the rest). Per-plan links are the right fit for Stripe Payment Links. Until one of these is set, "Start 7-day free trial" opens `/start`, which explains the card-required trial and emails haulbookspro@gmail.com.
 2. **App sign-in** — `NEXT_PUBLIC_APP_URL`. Until it is set, Sign in opens `/sign-in`.
-3. **Affiliate links** — `NEXT_PUBLIC_AFFILIATE_MUDFLAP`, `ATOB`, `TCS`, `RTS`, `WEX`, `COMDATA`. Until each one is set, that card links to the provider's public page (not an affiliate URL).
+3. **Affiliate links** — `NEXT_PUBLIC_AFFILIATE_COAST`, `ROADFLEX`, `ATOB`, `WEX`, `TSS`, `MUDFLAP`. Until each one is set, that button says “Get offer” (TSS says “Partner inquiry”) and opens the official program page in AFFILIATES.md. Start with Coast on PartnerStack.
 4. **Optional ads tag** — `NEXT_PUBLIC_GOOGLE_ADS_ID` (`AW-…` or `G-…`). Leave it blank to load no tag.
 
 `NEXT_PUBLIC_*` values are read at build time on Vercel. Change them, then redeploy.

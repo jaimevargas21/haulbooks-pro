@@ -70,6 +70,11 @@ export function SiteFooter() {
           </p>
           <p>{site.stripeMor}</p>
           <p>{site.notAdvice}</p>
+          <p>
+            Advertising disclosure: HaulBooks may earn a commission if you sign up for a fuel card or
+            discount program through links on this site, including the fuel-cards page. That commission
+            does not change the price you pay.
+          </p>
           <p className="font-medium text-ink">{site.poweredBy}</p>
           <p className="pt-2 text-[10px] uppercase tracking-[0.2em]">
             © {new Date().getFullYear()} HaulBooks Pro. All rights reserved.
