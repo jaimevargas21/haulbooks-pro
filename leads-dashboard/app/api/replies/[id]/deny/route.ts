@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { isSameOrigin } from "@/lib/origin";
+import { unauthorizedIfSignedOut } from "@/lib/require-session";
 import { getStore } from "@/lib/store";
 
 export const runtime = "nodejs";
@@ -13,6 +14,8 @@ async function readNote(req: Request) {
 }
 
 export async function POST(req: Request, context: { params: Promise<{ id: string }> }) {
+  const unauthorized = await unauthorizedIfSignedOut();
+  if (unauthorized) return unauthorized;
   if (!isSameOrigin(req)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
