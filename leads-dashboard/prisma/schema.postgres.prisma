@@ -1,0 +1,66 @@
+// Neon / any Postgres. Generate with scripts/generate-prisma.mjs.
+// Connection string lives in DATABASE_URL (see .env.example). The URL is not
+// stored in this file beyond the env() reference.
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../generated/postgres"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id           String   @id @default(cuid())
+  externalId   String   @unique
+  company      String
+  email        String   @unique
+  city         String
+  state        String
+  fleetSize    Int
+  status       String
+  notes        String   @default("")
+  lastActivity DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  replies      Reply[]
+
+  @@index([status])
+  @@index([lastActivity])
+}
+
+model Reply {
+  id           String   @id @default(cuid())
+  externalId   String?  @unique
+  leadId       String?
+  lead         Lead?    @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  fromEmail    String
+  subject      String
+  inboundBody  String
+  draftBody    String
+  status       String
+  reviewerNote String   @default("")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([status])
+  @@index([leadId])
+}
+
+model Ticket {
+  id         String   @id @default(cuid())
+  externalId String?  @unique
+  subject    String
+  fromEmail  String
+  body       String   @default("")
+  status     String
+  priority   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([status])
+  @@index([priority])
+}
