@@ -1,0 +1,45 @@
+{
+  "name": "haulbooks-leads-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "node scripts/generate-prisma.mjs",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "postinstall": "node scripts/generate-prisma.mjs",
+    "db:setup": "node scripts/db-setup.mjs",
+    "db:setup:postgres": "node scripts/db-setup-postgres.mjs",
+    "verify": "tsx scripts/verify-store.ts",
+    "verify:sqlite": "tsx scripts/verify-sqlite.ts",
+    "verify:http": "node scripts/verify-http.mjs"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.3",
+    "jose": "^6.1.0",
+    "next": "15.5.25",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.25",
+    "prisma": "6.19.3",
+    "tailwindcss": "^4",
+    "tsx": "^4.20.5",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

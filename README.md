@@ -6,6 +6,8 @@ Operated by Liberty Haul Logistics LLC. Support: haulbookspro@gmail.com. Stripe 
 
 This repository is the public marketing site (Next.js App Router). It does not include the product app, authentication, or a database.
 
+The internal leads and support dashboard is a separate Next.js app in [`leads-dashboard/`](leads-dashboard/README.md). Deploy that app as its own Vercel project. Do not change this site's root directory.
+
 ## Pages
 
 | Path | What it is |
