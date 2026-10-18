@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { LegalShell } from "@/components/legal-shell";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Refund Policy",
-  description: "30-day money-back guarantee and 7-day trial terms for HaulBooks Pro.",
-};
+  description: "30-day money-back guarantee and 7-day trial terms for HaulBooks Pro. Card required. Cancel before day 8 and you are not billed.",
+  path: "/refunds",
+});
 
 export default function RefundsPage() {
   return (

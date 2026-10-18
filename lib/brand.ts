@@ -11,8 +11,13 @@ export function heroImage() {
   return shipped("hero-highway-branded.png") ?? "/images/hero-truck.jpg";
 }
 
+/** Product UI for the homepage hero. Highway art stays a texture, not the hero. */
+export function dashboardImage() {
+  return shipped("dashboard-hero.png") ?? heroImage();
+}
+
 export function receiptImage() {
-  return shipped("feature-receipt-scan.png") ?? "/images/receipt-scan.jpg";
+  return shipped("receipt-cab.png") ?? shipped("feature-receipt-scan.png") ?? "/images/receipt-scan.jpg";
 }
 
 export function logoImage() {

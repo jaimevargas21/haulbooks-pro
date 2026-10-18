@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ButtonLink, Eyebrow, TrialNote } from "@/components/ui";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "For accountants",
+export const metadata: Metadata = pageMetadata({
+  title: "Accountant Access for Trucking Books",
   description:
     "Read-only trucking books, CSV exports, and IFTA worksheets. Clients invite you. You do not buy an owner-operator plan to get in.",
-};
+  path: "/for-accountants",
+});
 
 const gets = [
   {
@@ -41,7 +43,7 @@ export default function ForAccountantsPage() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <ButtonLink href="#invite">Ask a client to invite you</ButtonLink>
-          <ButtonLink href="/signup" variant="secondary">
+          <ButtonLink href={site.trialHref} variant="secondary">
             Owners: start free trial
           </ButtonLink>
         </div>
@@ -120,7 +122,7 @@ export default function ForAccountantsPage() {
               Start the trial, add the card, then invite your accountant from the app.
             </p>
             <div className="mt-5">
-              <ButtonLink href="/signup">Start free trial</ButtonLink>
+              <ButtonLink href={site.trialHref}>Start free trial</ButtonLink>
             </div>
             <TrialNote className="mt-3" />
           </article>
@@ -139,6 +141,10 @@ export default function ForAccountantsPage() {
           </article>
         </div>
         <p className="mt-6 text-sm text-muted">
+          <Link href="/demo" className="text-amber-300 underline">
+            Dashboard demo
+          </Link>
+          {" · "}
           <Link href="/product" className="text-amber-300 underline">
             Product tour
           </Link>

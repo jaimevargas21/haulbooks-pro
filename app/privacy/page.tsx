@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalShell } from "@/components/legal-shell";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Notice",
   description: "How HaulBooks Pro, operated by Liberty Haul Logistics LLC, collects and uses personal data.",
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

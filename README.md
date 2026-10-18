@@ -10,13 +10,14 @@ This repository is the public marketing site (Next.js App Router). It does not i
 
 | Path | What it is |
 | --- | --- |
-| `/` | Short decision homepage |
-| `/product` | Features, roles, full demo, calendar |
+| `/` | Outcome homepage: cost per mile, IFTA readiness, pricing, FAQ |
+| `/demo` | Interactive sample dashboard (Home, Receipts, Fuel & IFTA, Trucks, Reports) |
+| `/product` | Guided dashboard walkthrough tied to `/demo` |
 | `/ifta` | IFTA marketing landing. Not sign-in |
 | `/pricing` | Owner Operator $9.99/mo, Small Fleet $19.99/mo (most popular), Fleet Pro $39.99/mo |
 | `/fuel-cards` | Coast, RoadFlex, AtoB, WEX/EFS, TSS, and Mudflap. Tracking links come from env vars. See AFFILIATES.md |
 | `/for-accountants` | Accountant invite path |
-| `/blog` | Three launch posts |
+| `/blog` | IFTA prep for owner operators, trucking cost per mile, fuel receipt tracking |
 | `/signup` | Card-required trial handoff into the app. `/start` redirects here |
 | `/signin` | Sign-in only. `/sign-in` redirects here |
 | `/contact` | Contact form that opens the visitor's email app. `/support` redirects here |

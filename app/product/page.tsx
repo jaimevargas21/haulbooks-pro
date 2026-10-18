@@ -1,370 +1,214 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { DemoShowcase } from "@/components/demo-showcase";
+import { DemoPreview } from "@/components/demo-dashboard";
 import { FaqList } from "@/components/faq-list";
-import { PricingSection } from "@/components/pricing-section";
+import { JsonLd } from "@/components/json-ld";
 import { ButtonLink, CheckItem, Eyebrow, TrialNote } from "@/components/ui";
-import {
-  calendar,
-  features,
-  howItWorks,
-  jobCards,
-  productFaqs,
-  quotes,
-  replaces,
-  roles,
-  stats,
-} from "@/lib/content";
-import { heroImage, receiptImage } from "@/lib/brand";
-import { getPlans } from "@/lib/plans";
+import { dashboardImage } from "@/lib/brand";
+import { features, productFaqs, roles } from "@/lib/content";
+import type { DemoView } from "@/lib/demo-data";
+import { faqNode, organizationNode, schemaGraph, softwareNode } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      name: site.name,
-      url: site.url,
-      email: site.supportEmail,
-      brand: site.name,
-      parentOrganization: { "@type": "Organization", name: site.operator },
-    },
-    {
-      "@type": "SoftwareApplication",
-      name: site.name,
-      applicationCategory: "BusinessApplication",
-      operatingSystem: "Web",
-      description: site.description,
-      offers: [
-        { "@type": "Offer", name: "Owner Operator", price: "9.99", priceCurrency: "USD" },
-        { "@type": "Offer", name: "Small Fleet", price: "19.99", priceCurrency: "USD" },
-        { "@type": "Offer", name: "Fleet Pro", price: "39.99", priceCurrency: "USD" },
-      ],
-    },
-    {
-      "@type": "FAQPage",
-      mainEntity: productFaqs.map((item) => ({
-        "@type": "Question",
-        name: item.q,
-        acceptedAnswer: { "@type": "Answer", text: item.a },
-      })),
-    },
-  ],
-};
-
-export const metadata: Metadata = {
-  title: "Product",
+export const metadata: Metadata = pageMetadata({
+  title: "Trucking Dashboard: Receipts, Cost per Mile & IFTA",
   description:
-    "How HaulBooks Pro works: receipt capture, per-truck books, roles, IFTA worksheets, and the trucking calendar. 7-day trial, card required.",
-};
+    "Walk through the HaulBooks dashboard: snap fuel receipts, cost per mile by truck, and IFTA readiness. Open the live demo or start a 7-day trial. Card required.",
+  path: "/product",
+});
+
+const steps: { view: DemoView; kicker: string; title: string; body: string; points: string[] }[] = [
+  {
+    view: "home",
+    kicker: "Home",
+    title: "Four numbers, then the work.",
+    body: "Pick a truck. Cost per mile, fuel this month, IFTA readiness, and open gaps sit on one screen. Needs-attention names the missing receipt and the miles gap. Recent receipts are the last five stops on that unit.",
+    points: ["Truck selector, not a company average", "Upload a receipt or jump to IFTA", "Nothing here is a highway photo"],
+  },
+  {
+    view: "receipts",
+    kicker: "Receipts",
+    title: "The fuel receipt scanner, after the photo.",
+    body: "Search by vendor, then filter by truck or state. Each row keeps the amount, gallons, jurisdiction, and whether the photo posted. An empty filter tells you to widen the search instead of showing a blank app.",
+    points: ["Posted, needs review, or missing photo", "Gallons stay with the state you bought them in", "Duplicates are a product rule, not a demo trick"],
+  },
+  {
+    view: "ifta",
+    kicker: "Fuel & IFTA",
+    title: "Readiness before the spreadsheet.",
+    body: "Choose the quarter. The ring is the score. The checklist says what is done and what is a gap. The table is miles, gallons, and MPG by state. Export on the demo only toasts — the real CSV is in the trial.",
+    points: ["You still file with your base jurisdiction", "HaulBooks does not file the return", "Not tax advice"],
+  },
+  {
+    view: "trucks",
+    kicker: "Trucks",
+    title: "One card per unit.",
+    body: "Status, cost per mile, fuel, and IFTA on the trucks you actually run. Owner Operator is one truck. Small Fleet is up to five. Fleet Pro stops at 15.",
+    points: ["On the road, in the shop, or available", "Cost per mile is per truck", "Open a unit to land on Home"],
+  },
+  {
+    view: "reports",
+    kicker: "Reports",
+    title: "A snapshot your accountant can export.",
+    body: "Revenue, fuel, maintenance, fixed costs, and a net figure for the sample month. The live app exports CSV. This page is the shape of that report, with sample dollars.",
+    points: ["Invite an accountant instead of forwarding a shoebox", "Read-only seat, no second owner plan", "Figures on the demo are not a filing"],
+  },
+];
 
 export default function ProductPage() {
-  const plans = getPlans();
-
   return (
     <div className="hero-glow">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={schemaGraph(organizationNode(), softwareNode(), faqNode(productFaqs))} />
 
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-16 pt-12 sm:px-6 sm:pt-16 lg:grid-cols-2 lg:pb-24">
+      <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 pt-12 sm:px-6 sm:pt-16 lg:grid-cols-2">
         <div>
           <Eyebrow>Product tour</Eyebrow>
-          <h1 className="mt-5 font-display text-5xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
-            Receipts, miles, and IFTA in one cab-side app.
+          <h1 className="mt-4 font-display text-4xl font-bold leading-[1.02] tracking-tight sm:text-6xl">
+            The dashboard, screen by screen.
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-            Capture from the cab, sort books by truck, and hand your accountant a worksheet. This page is
-            the full tour — features, roles, demo, and the trucking calendar.
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+            Receipts, cost per mile, and IFTA readiness in one cab-side workspace. This walkthrough uses the same
+            sample company as the live demo.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/signup">Start free trial</ButtonLink>
-            <ButtonLink href="#demo" variant="secondary">
-              See the demo
+            <ButtonLink href="/demo">Open the demo</ButtonLink>
+            <ButtonLink href={site.trialHref} variant="secondary">
+              Start free trial
             </ButtonLink>
           </div>
           <TrialNote className="mt-4 max-w-md" />
         </div>
-        <div className="relative overflow-hidden rounded-3xl border border-line bg-navy-900 p-2">
+        <div className="overflow-hidden rounded-2xl border border-line bg-navy-900 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.85)]">
           <Image
-            src={heroImage()}
-            alt="Semi truck driving down an open highway at sunset"
-            width={1600}
-            height={1104}
+            src={dashboardImage()}
+            alt="HaulBooks dashboard home with cost per mile and IFTA readiness"
+            width={1280}
+            height={720}
             priority
-            className="h-[22rem] w-full rounded-2xl object-cover object-[70%_center] sm:h-[30rem]"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="h-auto w-full"
           />
-          <div className="pointer-events-none absolute inset-2 rounded-2xl bg-gradient-to-t from-navy-950/90 via-navy-950/15 to-transparent" />
-          <div className="absolute bottom-5 left-5 right-5 grid grid-cols-2 gap-3">
-            <div className="rounded-xl border border-amber-400/30 bg-navy-950/85 p-4 backdrop-blur">
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted">Est. fuel tax owed</p>
-              <p className="num mt-1 text-xl font-bold text-amber-400">$4,821.50</p>
-            </div>
-            <div className="rounded-xl border border-line bg-navy-950/85 p-4 backdrop-blur">
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted">IFTA readiness</p>
-              <p className="num mt-1 text-xl font-bold">92%</p>
-            </div>
-          </div>
         </div>
       </section>
 
-      <section id="what" className="scroll-mt-24 border-y border-line bg-navy-900/40 py-16 sm:py-24">
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 sm:px-6 lg:grid-cols-2">
-          <div>
-            <Eyebrow>What is HaulBooks Pro?</Eyebrow>
-            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">
-              Bookkeeping software built only for trucking.
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-muted">
-              HaulBooks Pro is a mobile-first bookkeeping app for owner-operators and small fleets.
-              Instead of a shoebox of fuel receipts, a spreadsheet of miles, and a generic accounting
-              tool that has never heard of IFTA, you get one place that understands trucks, drivers,
-              jurisdictions, and gallons.
-            </p>
-            <p className="mt-4 text-lg leading-relaxed text-muted">
-              Photograph a receipt at the pump and it becomes a categorized expense. Import your ELD
-              mileage and your state-by-state miles are ready. When the quarter closes, your IFTA
-              worksheet and tax-ready reports are already built — not something you spend a weekend
-              recreating.
-            </p>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {replaces.map((item) => (
-                <li key={item} className="rounded-xl border border-line bg-navy-950/50 p-4 text-sm font-medium">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="rounded-3xl border border-line bg-navy-950/50 p-6 sm:p-8">
-            <h3 className="font-display text-xl font-bold">How it works</h3>
-            <ol className="mt-6 space-y-6">
-              {howItWorks.map((item) => (
-                <li key={item.step} className="flex gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500 font-display font-bold text-navy-950">
-                    {item.step}
-                  </span>
-                  <div>
-                    <p className="font-bold">{item.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted">{item.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <div className="mt-8 rounded-2xl border border-line bg-navy-900 p-5 text-sm text-muted">
-              <p className="font-bold text-ink">Who it&apos;s for</p>
-              <p className="mt-1.5">
-                One-truck owner-operators, growing fleets up to {site.maxTrucks} trucks, and the drivers,
-                managers, and accountants who work with them.
+      <nav className="border-y border-line bg-navy-900/50" aria-label="Walkthrough">
+        <ul className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-5 py-3 sm:px-6">
+          {steps.map((step, index) => (
+            <li key={step.view}>
+              <a href={`#${step.view}`} className="inline-flex min-h-11 items-center rounded-full px-3 text-sm font-semibold text-muted hover:text-amber-300">
+                {index + 1}. {step.kicker}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {steps.map((step, index) => (
+        <section key={step.view} id={step.view} className="scroll-mt-24 border-b border-line py-16 sm:py-20">
+          <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-2">
+            <div className={index % 2 === 1 ? "lg:order-2" : undefined}>
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400">
+                {index + 1} · {step.kicker}
               </p>
+              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">{step.title}</h2>
+              <p className="mt-4 text-muted">{step.body}</p>
+              <ul className="mt-6 space-y-3">
+                {step.points.map((point) => (
+                  <CheckItem key={point}>{point}</CheckItem>
+                ))}
+              </ul>
+              <div className="mt-6">
+                <ButtonLink href={`/demo?view=${step.view}`}>Try {step.kicker} in the demo</ButtonLink>
+              </div>
+            </div>
+            <div className="h-[28rem] overflow-hidden rounded-2xl border border-line bg-navy-950">
+              <DemoPreview view={step.view} />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ))}
 
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24">
-        <Eyebrow>Built around the job</Eyebrow>
-        <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold tracking-tight sm:text-4xl">
-          The numbers that actually decide if a load was worth running.
-        </h2>
-        <p className="mt-4 max-w-2xl text-muted">
-          Generic accounting software knows invoices. It doesn&apos;t know deadhead, base jurisdiction, or
-          that a $6,900 in-frame overhaul is a repair and not a truck payment. HaulBooks Pro does.
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20">
+        <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">What the books actually hold</h2>
+        <p className="mt-3 max-w-2xl text-muted">
+          The demo is the map. These are the records behind each screen, including{" "}
+          <Link href="/ifta" className="text-amber-300 underline">
+            IFTA worksheets
+          </Link>{" "}
+          and{" "}
+          <Link href="/fuel-cards" className="text-amber-300 underline">
+            fuel-card gallons
+          </Link>
+          .
         </p>
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {jobCards.map((card) => (
-            <article key={card.title} className="rounded-2xl border border-line bg-navy-900/50 p-6">
-              <h3 className="font-display text-lg font-bold">{card.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{card.body}</p>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature) => (
+            <article key={feature.title} className="rounded-2xl border border-line bg-navy-900/40 p-6">
+              <h3 className="font-display text-xl font-bold">{feature.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{feature.body}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="border-y border-line bg-navy-900/40 py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-5 sm:px-6">
-          <Eyebrow>The trucking calendar</Eyebrow>
-          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">Nothing sneaks up on you.</h2>
-          <p className="mt-4 max-w-2xl text-muted">
-            Fuel tax quarters, heavy vehicle use tax, plate and permit renewals — HaulBooks Pro keeps the
-            records ready and reminds you before the deadline, not after the penalty.
-          </p>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {calendar.map((item) => (
-              <article key={item.what} className="rounded-2xl border border-line bg-navy-950/40 p-5">
-                <p className="num font-display text-lg font-bold text-amber-400">{item.when}</p>
-                <p className="mt-2 text-sm font-bold">{item.what}</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
-              </article>
-            ))}
-          </div>
-          <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted">
-            Filing dates are shown for planning only and can shift when a due date falls on a weekend or
-            holiday. {site.ifta}
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:px-6 sm:py-24 lg:grid-cols-2">
-        <div className="relative overflow-hidden rounded-3xl border border-line lg:order-1">
-          <Image
-            src={receiptImage()}
-            alt="Driver photographing a fuel receipt with a phone inside the truck cab"
-            width={1200}
-            height={900}
-            className="aspect-[4/3] w-full object-cover"
-          />
-          <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-amber-500 p-5 text-navy-950 sm:right-auto sm:max-w-xs">
-            <p className="font-display text-3xl font-bold tracking-tight">Seconds</p>
-            <p className="text-sm font-bold uppercase tracking-wide">From photo to booked expense</p>
-          </div>
-        </div>
-        <div>
-          <Eyebrow>Receipts, handled</Eyebrow>
-          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">Snap. Sync. Done.</h2>
-          <p className="mt-4 text-lg text-muted">
-            One photo is all it takes. HaulBooks Pro pulls the vendor, date, total, and gallons off the
-            receipt, sorts it into fuel, maintenance, or another deductible business expense, and flags
-            duplicates before they double-count in your books.
-          </p>
-          <ul className="mt-6 space-y-3">
-            {[
-              "Vendor, date, total, and gallons read automatically",
-              "Sorted into fuel, maintenance, or business expense",
-              "Duplicate receipts caught before they hit your books",
-            ].map((item) => (
-              <CheckItem key={item}>{item}</CheckItem>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section id="features" className="scroll-mt-24 border-t border-line bg-navy-900/30 py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-5 sm:px-6">
-          <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">Everything the paperwork asks for.</h2>
-          <p className="mt-4 max-w-2xl text-muted">
-            Run your truck or fleet without the paperwork pile — and hand your accountant clean, tax-ready
-            books at quarter-end.
-          </p>
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
-              <article key={feature.title} className="rounded-2xl border border-line bg-navy-950/40 p-6 transition hover:border-amber-400/40">
-                <h3 className="font-display text-xl font-bold">{feature.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{feature.body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 sm:px-6 sm:py-24 lg:grid-cols-2">
-        <div>
-          <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-            A seat for everyone who touches the books
-          </h2>
-          <p className="mt-4 text-muted">
-            Invite your team and everyone sees exactly what they should. Drivers upload receipts for their
-            own truck, managers run the fleet, accountants pull the reports, and you see everything.
-          </p>
-          <ul className="mt-6 space-y-3">
-            {roles.map((role) => (
-              <CheckItem key={role}>{role}</CheckItem>
-            ))}
-          </ul>
-        </div>
-        <div className="overflow-hidden rounded-3xl border border-line bg-navy-900/50">
-          <Image
-            src="/images/fleet-yard.jpg"
-            alt="Row of semi trucks parked in a fleet yard at dawn"
-            width={1200}
-            height={900}
-            className="h-56 w-full object-cover sm:h-64"
-          />
-          <div className="p-6">
-            <p className="font-bold">Records stay private to your company</p>
-            <p className="mt-2 text-sm text-muted">
-              Every receipt, bill, and mileage row is scoped to your company. Files are stored privately
-              and served through expiring links.
-            </p>
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              {stats.map(([value, label]) => (
-                <div key={label} className="rounded-xl border border-line bg-navy-950/50 p-3">
-                  <p className="num font-display text-xl font-bold text-amber-400">{value}</p>
-                  <p className="mt-1 text-xs text-muted">{label}</p>
-                </div>
+      <section className="border-y border-line bg-navy-900/40 py-16 sm:py-20">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:px-6 lg:grid-cols-2">
+          <div>
+            <h2 className="font-display text-3xl font-bold tracking-tight">A seat for everyone who touches the books</h2>
+            <ul className="mt-6 space-y-3">
+              {roles.map((role) => (
+                <CheckItem key={role}>{role}</CheckItem>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-line bg-navy-900/40 py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-5 sm:px-6">
-          <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-            Built around how drivers actually work
-          </h2>
-          <p className="mt-3 max-w-2xl text-muted">
-            The situations HaulBooks Pro was designed to fix, in the words of the owner-operators, fleet
-            owners, and drivers we built it with.
-          </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {quotes.map((item) => (
-              <figure key={item.name} className="rounded-2xl border border-line bg-navy-950/40 p-5">
-                <blockquote className="text-sm leading-relaxed">&ldquo;{item.quote}&rdquo;</blockquote>
-                <figcaption className="mt-4 text-xs">
-                  <span className="font-semibold">{item.name}</span>
-                  <span className="text-muted"> — {item.detail}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-          <p className="mt-5 text-xs text-muted">
-            Composite examples drawn from customer-research interviews, not verbatim statements from named
-            customers.
-          </p>
-        </div>
-      </section>
-
-      <section id="pricing" className="scroll-mt-24 px-5 py-16 sm:px-6 sm:py-24">
-        <div className="mx-auto max-w-6xl">
-          <PricingSection plans={plans} />
-        </div>
-      </section>
-
-      <section id="demo" className="scroll-mt-24 border-y border-line bg-navy-900/40 py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-5 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
-            <Eyebrow>Interactive demo</Eyebrow>
-            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">See HaulBooks Pro in action</h2>
-            <p className="mt-3 text-muted">
-              Click through receipt scanning, IFTA prep, expense tracking, and monthly bills. These are
-              sample screens with sample numbers.
+            </ul>
+            <p className="mt-6 text-sm">
+              <Link href="/for-accountants" className="font-semibold text-amber-300">
+                Accountant access →
+              </Link>
             </p>
           </div>
-          <div className="mt-10">
-            <DemoShowcase />
+          <div className="rounded-2xl border border-line bg-navy-950/50 p-6">
+            <h3 className="font-display text-xl font-bold">Keep reading</h3>
+            <ul className="mt-4 space-y-3 text-sm">
+              <li>
+                <Link href="/pricing" className="font-semibold text-amber-300">
+                  Pricing from $9.99
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/ifta-quarterly-checklist" className="font-semibold text-amber-300">
+                  IFTA prep for owner operators
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/cost-per-mile" className="font-semibold text-amber-300">
+                  Trucking cost per mile
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/what-belongs-in-trucking-books" className="font-semibold text-amber-300">
+                  Fuel receipt tracking
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl px-5 py-16 sm:px-6 sm:py-24">
-        <FaqList id="faq" items={productFaqs} />
+      <section className="mx-auto max-w-3xl px-5 py-16 sm:px-6">
+        <FaqList items={productFaqs} />
       </section>
 
       <section className="px-5 pb-20 text-center sm:px-6">
-        <h2 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">Ready to clear the shoebox?</h2>
-        <p className="mx-auto mt-4 max-w-xl text-muted">
-          Seven days free. Card on file. Cancel before day 8 and you are not charged.
-        </p>
+        <h2 className="font-display text-4xl font-bold tracking-tight">Ready when the next receipt is.</h2>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <ButtonLink href="/signup">Start free trial</ButtonLink>
-          <ButtonLink href="/pricing" variant="secondary">
-            See pricing
+          <ButtonLink href={site.trialHref}>Start free trial</ButtonLink>
+          <ButtonLink href="/demo" variant="secondary">
+            Open the demo
           </ButtonLink>
         </div>
         <TrialNote className="mt-4" />
-        <p className="mt-4 text-sm text-muted">
-          Questions? <Link href="/contact" className="text-amber-300 underline">Contact support</Link>
-        </p>
       </section>
     </div>
   );

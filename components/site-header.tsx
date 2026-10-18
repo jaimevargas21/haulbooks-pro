@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { BrandMark } from "@/components/brand-mark";
 import { nav } from "@/lib/content";
+import { site } from "@/lib/site";
 import { ButtonLink } from "@/components/ui";
 
 export function SiteHeader({ logoSrc }: { logoSrc: string }) {
@@ -28,7 +29,7 @@ export function SiteHeader({ logoSrc }: { logoSrc: string }) {
               Sign in
             </ButtonLink>
           </span>
-          <ButtonLink href="/signup" className="px-4 py-2 text-xs sm:text-sm">
+          <ButtonLink href={site.trialHref} className="px-4 py-2 text-xs sm:text-sm">
             Start free trial
           </ButtonLink>
           <button

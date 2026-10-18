@@ -6,7 +6,9 @@ export const site = {
   operator: "Liberty Haul Logistics LLC",
   poweredBy: "HAUL BOOKS PRO is powered by Liberty Haul Logistics LLC",
   description:
-    "Snap receipts, track fuel and expenses, manage recurring bills, log mileage by state, and prep IFTA. Mobile-first bookkeeping for owner-operators and small fleets.",
+    "Trucking bookkeeping for owner-operators and small fleets. Snap fuel receipts, see cost per mile by truck, and walk into IFTA ready. 7-day trial, card required.",
+  /** Repeated primary CTA. Card-required trial, Small Fleet monthly. */
+  trialHref: "/signup?plan=small-fleet&interval=monthly",
   stripeMor:
     "Our order process is conducted by Stripe, the Merchant of Record for our orders. Stripe handles payments, invoicing, tax, and payment-related customer service.",
   notAdvice:

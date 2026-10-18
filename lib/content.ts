@@ -1,3 +1,61 @@
+export const comparison = [
+  {
+    old: "A shoebox of fuel receipts behind the seat",
+    next: "Snap the receipt in the cab. Vendor, gallons, and state file to the truck.",
+  },
+  {
+    old: "An IFTA spreadsheet the night before it is due",
+    next: "The worksheet builds as you drive, with a readiness score and the gaps named.",
+  },
+  {
+    old: "Guessing cost per mile from a load-board rate",
+    next: "Cost per mile per truck, from the fuel, repairs, and miles that unit actually ran.",
+  },
+  {
+    old: "Chasing drivers for paperwork on payday",
+    next: "Drivers upload to their own truck. You see the receipt without the chase.",
+  },
+  {
+    old: "A quarter-end pile your accountant has to rebuild",
+    next: "CSV exports and a read-only accountant seat. The images stay attached.",
+  },
+] as const;
+
+export const homeFaqs = [
+  {
+    q: "What is trucking bookkeeping in HaulBooks Pro?",
+    a: "HaulBooks Pro is bookkeeping for owner-operators and small fleets. You snap fuel and repair receipts, keep expenses and miles on each truck, and see cost per mile without a generic accounting tool that has never heard of a jurisdiction.",
+  },
+  {
+    q: "How do you track cost per mile for a truck?",
+    a: "Cost per mile is the fuel, tolls, repairs, and fixed costs on that unit, divided by the miles that unit ran. The dashboard shows it per truck so a load-board rate can be compared with what the truck actually costs to roll.",
+  },
+  {
+    q: "Is this an IFTA spreadsheet?",
+    a: "It replaces the quarter-end spreadsheet. Fuel purchases and miles stay separated by jurisdiction, and each quarter you get a worksheet with miles, gallons, and MPG plus an IFTA readiness score. HaulBooks Pro prepares the worksheet. It does not file the return, and it is not tax advice.",
+  },
+  {
+    q: "How does IFTA readiness work for owner-operators?",
+    a: "The readiness score is a percentage of the quarter that is complete, with the missing pieces named: a fuel stop without a receipt, miles that are not on a truck, or a state that does not match. You fix those rows before you file with your base jurisdiction.",
+  },
+  {
+    q: "Does the fuel receipt scanner work from the cab?",
+    a: "Yes. Photograph a fuel, repair, or supply receipt on your phone. HaulBooks Pro reads the vendor, date, total, and gallons, then files it to the truck. You can edit any field before it is saved. Duplicate photos and matching vendor, date, and amount are flagged.",
+  },
+  {
+    q: "Can I track owner-operator expenses besides fuel?",
+    a: "Yes. Scale tickets, lumper fees, tolls, parking, permits, insurance, and the truck note can sit on the same truck as the fuel. Your accountant decides what is deductible. The software keeps the record and the image.",
+  },
+  {
+    q: "Do I need a credit card for the 7-day trial?",
+    a: "Yes. A credit card is required to start. You are not charged until day 8. Cancel before then and you are not billed.",
+  },
+  {
+    q: "Can my accountant get the books out?",
+    a: "Yes. Invite them as an accountant for read-only financials, CSV exports, and the IFTA worksheet. They do not buy an owner plan. HaulBooks Pro does not file income taxes.",
+  },
+] as const;
+
 export const nav = [
   { href: "/product", label: "Product" },
   { href: "/ifta", label: "IFTA" },

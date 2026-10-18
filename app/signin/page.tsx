@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ButtonLink, TrialNote } from "@/components/ui";
 import { signInLink } from "@/lib/checkout";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Sign in",
   description: "Sign in to the HaulBooks Pro workspace.",
-  robots: { index: false, follow: false },
-};
+  path: "/signin",
+  index: false,
+});
 
 export default function SignInPage() {
   const signIn = signInLink();
@@ -23,7 +25,7 @@ export default function SignInPage() {
         <ButtonLink href={signIn.href}>Continue to the app</ButtonLink>
       </div>
       <p className="mt-6 text-sm text-muted">
-        New company? <Link className="text-amber-300 underline" href="/signup">Start free trial</Link>.
+        New company? <Link className="text-amber-300 underline" href={site.trialHref}>Start free trial</Link>.
       </p>
       <TrialNote className="mt-3" />
       <p className="mt-8 text-xs text-muted">
