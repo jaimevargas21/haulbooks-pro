@@ -4,6 +4,8 @@ import { FuelEstimator } from "@/components/fuel-estimator";
 import { ButtonLink, Eyebrow, TrialNote } from "@/components/ui";
 import { fuelTips } from "@/lib/content";
 import { commissionDisclosure, getFuelOffers, joinChecklist } from "@/lib/fuel";
+import { pageMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
 
 function pickLabel(id: string) {
   if (id === "mudflap") return "Best for owner-operators";
@@ -11,11 +13,12 @@ function pickLabel(id: string) {
   return null;
 }
 
-export const metadata: Metadata = {
-  title: "Fuel cards",
+export const metadata: Metadata = pageMetadata({
+  title: "Fuel Cards for Trucking Fleets",
   description:
-    "Compare Coast, RoadFlex, AtoB, WEX/EFS, TSS, and Mudflap. HaulBooks may earn a commission if you use these links. Your price does not change.",
-};
+    "Compare Coast, RoadFlex, AtoB, WEX/EFS, TSS, and Mudflap for trucking fuel. HaulBooks may earn a commission. Your price does not change. Gallons still belong in the books.",
+  path: "/fuel-cards",
+});
 
 export default function FuelCardsPage() {
   const offers = getFuelOffers();
@@ -34,7 +37,7 @@ export default function FuelCardsPage() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <ButtonLink href="#programs">Compare partner offers</ButtonLink>
-          <ButtonLink href="/signup" variant="secondary">
+          <ButtonLink href={site.trialHref} variant="secondary">
             Track fuel in HaulBooks
           </ButtonLink>
         </div>
@@ -136,7 +139,7 @@ export default function FuelCardsPage() {
                   </ul>
                   <p className="mt-4 text-sm text-muted">
                     After you look at the offer,{" "}
-                    <Link href="/signup" className="text-amber-300 underline">
+                    <Link href={site.trialHref} className="text-amber-300 underline">
                       track those gallons in HaulBooks
                     </Link>
                     .
@@ -188,7 +191,16 @@ export default function FuelCardsPage() {
             and the IFTA worksheet is ready when the quarter closes.
           </p>
           <div className="mt-6">
-            <ButtonLink href="/signup">Track fuel in HaulBooks</ButtonLink>
+            <ButtonLink href={site.trialHref}>Track fuel in HaulBooks</ButtonLink>
+            <p className="mt-4 text-sm">
+              <Link href="/demo?view=receipts" className="font-semibold text-amber-300">
+                See receipt tracking in the demo
+              </Link>
+              {" · "}
+              <Link href="/blog/what-belongs-in-trucking-books" className="font-semibold text-amber-300">
+                Fuel receipt tracking
+              </Link>
+            </p>
           </div>
           <TrialNote className="mt-3" />
         </section>

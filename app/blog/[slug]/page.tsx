@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ButtonLink, TrialNote } from "@/components/ui";
 import { getPost, posts } from "@/lib/blog";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -17,7 +18,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return { title: "Blog" };
-  return { title: post.title, description: post.description };
+  return pageMetadata({
+    title: post.title,
+    description: post.description,
+    path: `/blog/${post.slug}`,
+  });
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -64,7 +69,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <h2 className="font-display text-2xl font-bold">Put the next quarter in the app</h2>
         <p className="mt-2 text-sm text-muted">Seven days free. Card required. Cancel before day 8.</p>
         <div className="mt-5">
-          <ButtonLink href="/signup">Start free trial</ButtonLink>
+          <ButtonLink href={site.trialHref}>Start free trial</ButtonLink>
         </div>
         <TrialNote className="mt-3" />
       </div>

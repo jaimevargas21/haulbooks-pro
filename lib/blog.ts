@@ -10,13 +10,14 @@ export type Post = {
 export const posts: Post[] = [
   {
     slug: "ifta-quarterly-checklist",
-    title: "IFTA quarterly checklist for owner-operators",
+    title: "IFTA prep for owner operators",
     description:
-      "A practical checklist for miles, gallons, receipts, and the readiness score before you file IFTA. HaulBooks prepares the worksheet. You still file.",
+      "IFTA prep for owner operators: miles, gallons, fuel receipts, and a readiness score before you file. HaulBooks prepares the worksheet. You still file.",
     date: "2026-09-08",
     related: [
       { href: "/ifta", label: "IFTA worksheets" },
-      { href: "/product", label: "Product tour" },
+      { href: "/demo?view=ifta", label: "IFTA dashboard demo" },
+      { href: "/blog/cost-per-mile", label: "Trucking cost per mile" },
     ],
     sections: [
       {
@@ -46,19 +47,20 @@ export const posts: Post[] = [
   },
   {
     slug: "what-belongs-in-trucking-books",
-    title: "What belongs in your trucking books",
+    title: "Fuel receipt tracking for trucking",
     description:
-      "Fuel, repairs, tolls, lumpers, permits, and the small deductions that disappear when they stay on paper. Capture them in the cab.",
+      "Fuel receipt tracking for trucking: photograph the receipt in the cab, keep gallons by state, and hand your accountant a file instead of a shoebox.",
     date: "2026-09-10",
     related: [
       { href: "/product", label: "How capture works" },
-      { href: "/for-accountants", label: "For accountants" },
+      { href: "/demo?view=receipts", label: "Receipts demo" },
+      { href: "/blog/ifta-quarterly-checklist", label: "IFTA prep for owner operators" },
     ],
     sections: [
       {
         heading: "The shoebox is the leak",
         paragraphs: [
-          "Fuel is obvious. The money that vanishes is the scale ticket, the lumper, the shower, the parking receipt, the permit, and the toll that never made it out of the door pocket.",
+          "Fuel receipt tracking is the habit that keeps gallons honest. The money that still vanishes is the scale ticket, the lumper, the shower, the parking receipt, the permit, and the toll that never made it out of the door pocket.",
           "Photograph it when you pay. Vendor, date, and total are easier to read on a fresh receipt than on a faded one in March.",
         ],
       },
@@ -80,13 +82,14 @@ export const posts: Post[] = [
   },
   {
     slug: "cost-per-mile",
-    title: "Cost per mile: how to know if a load pays",
+    title: "Trucking cost per mile",
     description:
-      "Fuel, tolls, and fixed costs divided by the miles that truck actually turned. A rate that looks fine on the load board can still lose money.",
+      "Trucking cost per mile, per truck: fuel, tolls, and fixed costs divided by the miles that unit actually turned. A load-board rate can still lose money.",
     date: "2026-09-12",
     related: [
-      { href: "/product", label: "Per-truck books" },
+      { href: "/demo", label: "Cost per mile demo" },
       { href: "/pricing", label: "Pricing" },
+      { href: "/blog/what-belongs-in-trucking-books", label: "Fuel receipt tracking" },
     ],
     sections: [
       {

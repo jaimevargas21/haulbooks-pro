@@ -3,7 +3,7 @@ import { DM_Sans, Space_Grotesk } from "next/font/google";
 import { AdsTag } from "@/components/ads-tag";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { logoImage, shareImage } from "@/lib/brand";
+import { logoImage } from "@/lib/brand";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -22,32 +22,32 @@ const display = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "HaulBooks Pro — Trucking bookkeeping & IFTA prep",
+    default: "Trucking Bookkeeping & IFTA Readiness | HaulBooks Pro",
     template: "%s · HaulBooks Pro",
   },
   description: site.description,
   applicationName: site.name,
   keywords: [
     "trucking bookkeeping",
-    "IFTA prep",
-    "owner operator accounting",
-    "fuel receipt scanning",
-    "small fleet bookkeeping",
+    "IFTA spreadsheet",
+    "IFTA readiness",
+    "IFTA for owner operators",
+    "owner operator expense tracking",
+    "cost per mile trucking",
+    "fuel receipt scanner trucking",
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: site.url,
     siteName: site.name,
-    title: "HaulBooks Pro — Trucking bookkeeping & IFTA prep",
+    title: "Trucking Bookkeeping & IFTA Readiness | HaulBooks Pro",
     description: site.description,
-    ...(shareImage() ? { images: [{ url: shareImage()!, alt: "HaulBooks Pro" }] } : {}),
   },
   twitter: {
     card: "summary_large_image",
-    title: "HaulBooks Pro — Trucking bookkeeping & IFTA prep",
+    title: "Trucking Bookkeeping & IFTA Readiness | HaulBooks Pro",
     description: site.description,
-    ...(shareImage() ? { images: [shareImage()!] } : {}),
   },
 };
 

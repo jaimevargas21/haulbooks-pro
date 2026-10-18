@@ -5,6 +5,7 @@ import { site } from "@/lib/site";
 
 const product = [
   { href: "/product", label: "Product" },
+  { href: "/demo", label: "Dashboard demo" },
   { href: "/ifta", label: "IFTA" },
   { href: "/pricing", label: "Pricing" },
   { href: "/fuel-cards", label: "Fuel cards" },

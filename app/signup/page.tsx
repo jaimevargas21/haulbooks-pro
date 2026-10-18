@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { SignupFlow } from "@/components/signup-flow";
 import { findPlan, parseInterval } from "@/lib/plans";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Start free trial",
   description:
     "Start a HaulBooks Pro 7-day trial. A credit card is required. You are not charged until day 8. Cancel before then and you are not billed.",
-  robots: { index: false, follow: false },
-};
+  path: "/signup",
+  index: false,
+});
 
 export default async function SignupPage({
   searchParams,

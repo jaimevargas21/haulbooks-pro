@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { SupportForm } from "@/components/support-form";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: `Contact HaulBooks Pro support at ${site.supportEmail}.`,
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Contact HaulBooks Pro Support",
+  description: `Contact HaulBooks Pro support at ${site.supportEmail}. Questions about the 7-day trial, IFTA worksheets, or accountant access.`,
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

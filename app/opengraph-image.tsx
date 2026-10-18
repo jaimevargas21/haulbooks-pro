@@ -2,8 +2,8 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "HaulBooks Pro — trucking bookkeeping and IFTA prep";
-export const size = { width: 1200, height: 630 };
+export const alt = "HaulBooks Pro — know your cost per mile and walk into IFTA ready";
+export const size = { width: 1280, height: 720 };
 export const contentType = "image/png";
 
 export default async function OpenGraphImage() {
@@ -39,7 +39,7 @@ export default async function OpenGraphImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 68, fontWeight: 700, lineHeight: 1.05, maxWidth: 900 }}>
-            The books behind every mile you run.
+            Know your cost per mile. Walk into IFTA ready.
           </div>
           <div style={{ marginTop: 24, fontSize: 28, color: "#c9d2e3", maxWidth: 860 }}>
             Receipts, fuel, bills, miles, and IFTA prep for owner-operators and small fleets.

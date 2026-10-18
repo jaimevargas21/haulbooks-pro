@@ -1,23 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqList } from "@/components/faq-list";
+import { JsonLd } from "@/components/json-ld";
 import { PricingSection } from "@/components/pricing-section";
 import { ButtonLink, Eyebrow, TrialNote } from "@/components/ui";
 import { pricingFaqs } from "@/lib/content";
 import { getPlans } from "@/lib/plans";
-import { trialPoints as points } from "@/lib/site";
+import { faqNode, schemaGraph, softwareNode } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
+import { site, trialPoints as points } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Pricing",
+export const metadata: Metadata = pageMetadata({
+  title: "Trucking Bookkeeping Pricing from $9.99",
   description:
-    "HaulBooks Pro trucking bookkeeping from $9.99 a month. Owner Operator, Small Fleet, and Fleet Pro up to 15 trucks. 7-day trial, credit card required.",
-};
+    "Trucking bookkeeping from $9.99 a month. Owner Operator, Small Fleet, and Fleet Pro up to 15 trucks. 7-day trial, credit card required. Yearly is about twelve times monthly.",
+  path: "/pricing",
+});
 
 export default function PricingPage() {
   const plans = getPlans();
 
   return (
     <div className="hero-glow px-5 py-14 sm:px-6 sm:py-20">
+      <JsonLd data={schemaGraph(softwareNode(), faqNode(pricingFaqs))} />
       <div className="mx-auto max-w-6xl">
         <Eyebrow>7-day free trial on every plan</Eyebrow>
         <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-5xl">
@@ -52,7 +57,7 @@ export default function PricingPage() {
           <h2 className="font-display text-3xl font-bold">Ready to clear the shoebox?</h2>
           <p className="mt-3 text-muted">Seven days free. Card on file. Cancel before day 8.</p>
           <div className="mt-6">
-            <ButtonLink href="/signup?plan=small-fleet&interval=yearly">Start free trial</ButtonLink>
+            <ButtonLink href={site.trialHref}>Start free trial</ButtonLink>
           </div>
           <TrialNote className="mt-3" />
           <p className="mt-4 text-sm text-muted">

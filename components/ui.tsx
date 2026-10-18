@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 const styles = {
   primary:
-    "inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-5 py-3 text-sm font-bold text-navy-950 transition hover:bg-amber-400",
+    "inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-5 py-3 text-sm font-bold text-navy-950 transition hover:bg-amber-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300",
   secondary:
     "inline-flex items-center justify-center gap-2 rounded-full border border-line bg-navy-900/80 px-5 py-3 text-sm font-bold text-ink transition hover:border-amber-400/60",
   ghost:

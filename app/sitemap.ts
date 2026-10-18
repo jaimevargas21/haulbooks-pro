@@ -5,6 +5,7 @@ import { site } from "@/lib/site";
 const paths = [
   "",
   "/product",
+  "/demo",
   "/ifta",
   "/pricing",
   "/fuel-cards",

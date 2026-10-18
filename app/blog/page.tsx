@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { posts } from "@/lib/blog";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "IFTA checklists, trucking books, and cost per mile for owner-operators and small fleets.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Trucking Bookkeeping Guides",
+  description:
+    "Guides on IFTA prep for owner operators, trucking cost per mile, and fuel receipt tracking. Not tax advice.",
+  path: "/blog",
+});
 
 export default function BlogIndexPage() {
   return (

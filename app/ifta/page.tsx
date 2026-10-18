@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { JsonLd } from "@/components/json-ld";
 import { ButtonLink, Eyebrow, TrialNote } from "@/components/ui";
 import { calendar } from "@/lib/content";
+import { faqNode, schemaGraph, softwareNode } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "IFTA worksheets for owner-operators",
+export const metadata: Metadata = pageMetadata({
+  title: "IFTA for Owner Operators",
   description:
-    "Prepare IFTA miles and gallons by jurisdiction, with a readiness score and receipts attached. HaulBooks Pro does not file the return. 7-day trial, card required.",
-};
+    "IFTA for owner operators without the spreadsheet scramble. Miles, gallons, and a readiness score by jurisdiction. HaulBooks prepares the worksheet and does not file it.",
+  path: "/ifta",
+});
 
 const needs = [
   {
@@ -53,6 +57,7 @@ const faqs = [
 export default function IftaPage() {
   return (
     <div className="hero-glow">
+      <JsonLd data={schemaGraph(softwareNode(), faqNode(faqs))} />
       <section className="mx-auto max-w-6xl px-5 pb-16 pt-14 sm:px-6 sm:pt-20">
         <Eyebrow>IFTA preparation</Eyebrow>
         <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-6xl">
@@ -63,7 +68,7 @@ export default function IftaPage() {
           the auditor asks.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href="/signup">Start free trial</ButtonLink>
+          <ButtonLink href={site.trialHref}>Start free trial</ButtonLink>
           <ButtonLink href="/pricing" variant="secondary">
             See pricing
           </ButtonLink>
@@ -103,6 +108,10 @@ export default function IftaPage() {
         <p className="mt-6 text-sm">
           <Link href="/product" className="font-semibold text-amber-300">
             See the full product →
+          </Link>
+          <span className="text-muted"> · </span>
+          <Link href="/demo?view=ifta" className="font-semibold text-amber-300">
+            Open the IFTA demo
           </Link>
         </p>
       </section>
@@ -154,7 +163,7 @@ export default function IftaPage() {
             $479.92, billed once. That is about twelve times the monthly price.
           </p>
           <div className="mt-6">
-            <ButtonLink href="/signup?plan=small-fleet&interval=yearly">Start free trial</ButtonLink>
+            <ButtonLink href={site.trialHref}>Start free trial</ButtonLink>
           </div>
           <TrialNote className="mt-4" />
           <p className="mt-4 text-sm">
@@ -194,7 +203,7 @@ export default function IftaPage() {
       <section className="px-5 pb-20 text-center sm:px-6">
         <h2 className="font-display text-4xl font-bold">Walk into the quarter with a worksheet.</h2>
         <div className="mt-6">
-          <ButtonLink href="/signup">Start free trial</ButtonLink>
+          <ButtonLink href={site.trialHref}>Start free trial</ButtonLink>
         </div>
         <TrialNote className="mt-4" />
       </section>

@@ -3,14 +3,15 @@
 @theme inline {
   --font-sans: var(--font-dm), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --color-navy-950: #0b1220;
-  --color-navy-900: #0f1b2d;
+  --color-navy-950: #071422;
+  --color-navy-900: #0b1b33;
   --color-navy-850: #152238;
   --color-navy-800: #1c2c46;
   --color-navy-700: #2a3d5c;
   --color-amber-300: #ffd27a;
   --color-amber-400: #e8a017;
   --color-amber-500: #f5a623;
+  --color-amber-600: #e09410;
   --color-ink: oklch(97.5% 0.008 95);
   --color-muted: oklch(78% 0.02 255);
   --color-line: oklch(100% 0 0 / 0.12);
